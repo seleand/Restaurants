@@ -12,6 +12,7 @@
 </head>
 <body>
 <h2><a href="index.html">Home</a></h2>
+<h2>List of restaurants</h2>
 
 </body>
 </html>
