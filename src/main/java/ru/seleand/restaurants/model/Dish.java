@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Created by Asus on 01.11.2016.
  */
-public class Dish {
+public class Dish extends BaseEntity{
     private final LocalDate date;
 
     private final String description;
