@@ -49,6 +49,7 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>Dish list</h3>
+    <a href="dishes?action=create&restaurantId=${restaurantId}">Add dish</a>
     <hr>
     <table class="tg">
         <thead>
@@ -56,6 +57,8 @@
             <th>Date</th>
             <th>Description</th>
             <th>Price</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <c:forEach items="${dishList}" var="dish">
@@ -68,9 +71,12 @@
                 </td>
                 <td>${dish.description}</td>
                 <td><fmt:formatNumber type="number" minFractionDigits="2" value="${dish.price/100}"/></td>
+                <td><a href="dishes?action=update&id=${dish.id}&restaurantId=${restaurantId}">Update</a></td>
+                <td><a href="dishes?action=delete&id=${dish.id}&restaurantId=${restaurantId}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
+    <a href="restaurants">Restaurant list</a>
 </section>
 
 </body>

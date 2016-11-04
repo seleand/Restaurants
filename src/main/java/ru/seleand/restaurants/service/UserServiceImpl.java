@@ -1,5 +1,7 @@
 package ru.seleand.restaurants.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.repository.UserRepository;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * Created by Asus on 02.11.2016.
  */
+@Service
 public class UserServiceImpl implements UserService{
     private UserRepository repository;
     @Override

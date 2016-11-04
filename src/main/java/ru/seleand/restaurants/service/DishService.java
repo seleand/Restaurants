@@ -9,14 +9,14 @@ import java.util.List;
  * Created by Asus on 02.11.2016.
  */
 public interface DishService {
-    Dish save(Dish dish);
+    Dish save(Dish dish, int restaurantId);
 
-    void delete(int id) throws NotFoundException;
+    void delete(int id, int restaurantId) throws NotFoundException;
 
-    Dish get(int id) throws NotFoundException;
+    Dish get(int id, int restaurantId) throws NotFoundException;
 
-    List<Dish> getAll();
+    List<Dish> getAll(int restaurantId);
 
-    void update(Dish dish);
+    void update(Dish dish, int restaurantId);
 
 }

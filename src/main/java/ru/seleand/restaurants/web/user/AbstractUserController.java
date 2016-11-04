@@ -2,6 +2,7 @@ package ru.seleand.restaurants.web.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.service.UserService;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public abstract class AbstractUserController {
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
+    @Autowired
     private UserService service;
 
     public List<User> getAll() {

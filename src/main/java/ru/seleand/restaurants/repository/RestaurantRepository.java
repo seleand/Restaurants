@@ -18,4 +18,5 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
+    void init();
 }
