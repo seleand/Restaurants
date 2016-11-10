@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Restaurant list</title>
+    <link rel="stylesheet" href="css/style1.css">
+<%--
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -42,6 +44,7 @@
             background-color: #f9f9f9
         }
     </style>
+--%>
 </head>
 <body>
 <section>
