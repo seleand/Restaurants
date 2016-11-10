@@ -5,7 +5,7 @@ import ru.seleand.restaurants.model.Role;
 /**
  * Created by Asus on 10.11.2016.
  */
-public class AuthorisedUser {
+public class AuthorizedUser {
 
     private static int id = 1;
 
@@ -16,7 +16,7 @@ public class AuthorisedUser {
     }
 
     public static void setId(int id) {
-        AuthorisedUser.id = id;
+        AuthorizedUser.id = id;
     }
 
     public static Role getMainRole() {
@@ -24,6 +24,6 @@ public class AuthorisedUser {
     }
 
     public static void setMainRole(Role mainRole) {
-        AuthorisedUser.mainRole = mainRole;
+        AuthorizedUser.mainRole = mainRole;
     }
 }
