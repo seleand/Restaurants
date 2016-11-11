@@ -6,7 +6,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.repository.RestaurantRepository;
-import ru.seleand.restaurants.repository.mock.RestaurantRepositoryImpl;
 import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
 
 import javax.servlet.ServletConfig;
@@ -31,8 +30,8 @@ public class RestaurantServlet extends javax.servlet.http.HttpServlet {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         restController = springContext.getBean(RestaurantAdminRestController.class);
-        RestaurantRepository repository = springContext.getBean(RestaurantRepositoryImpl.class);
-        repository.init();
+//        RestaurantRepository repository = springContext.getBean(RestaurantRepositoryImpl.class);
+//        repository.init();
     }
 
     @Override

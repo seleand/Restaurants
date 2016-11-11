@@ -7,8 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.repository.DishRepository;
 import ru.seleand.restaurants.repository.RestaurantRepository;
-import ru.seleand.restaurants.repository.mock.DishRepositoryImpl;
-import ru.seleand.restaurants.repository.mock.RestaurantRepositoryImpl;
 import ru.seleand.restaurants.util.DishUtil;
 import ru.seleand.restaurants.web.dish.DishAdminRestController;
 import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
@@ -36,8 +34,8 @@ public class DishServlet extends javax.servlet.http.HttpServlet {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         restController = springContext.getBean(DishAdminRestController.class);
-        DishRepository repository = springContext.getBean(DishRepositoryImpl.class);
-        repository.init();
+//        DishRepository repository = springContext.getBean(DishRepositoryImpl.class);
+//        repository.init();
     }
 
     @Override
