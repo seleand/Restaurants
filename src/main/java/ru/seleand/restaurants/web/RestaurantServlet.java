@@ -28,7 +28,7 @@ public class RestaurantServlet extends javax.servlet.http.HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
         restController = springContext.getBean(RestaurantAdminRestController.class);
 //        RestaurantRepository repository = springContext.getBean(RestaurantRepositoryImpl.class);
 //        repository.init();

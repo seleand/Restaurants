@@ -32,7 +32,7 @@ public class DishServlet extends javax.servlet.http.HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
         restController = springContext.getBean(DishAdminRestController.class);
 //        DishRepository repository = springContext.getBean(DishRepositoryImpl.class);
 //        repository.init();

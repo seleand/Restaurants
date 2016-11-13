@@ -12,7 +12,26 @@ public class Dish extends BaseEntity{
 
     private int price;
 
-    private final int restaurantId;
+    private int restaurantId;
+
+    public Dish() {
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
     public Dish(LocalDate date, String description, int price, int restaurantId) {
         this.date = date;
