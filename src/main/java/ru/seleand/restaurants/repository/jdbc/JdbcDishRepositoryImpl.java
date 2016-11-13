@@ -73,7 +73,7 @@ public class JdbcDishRepositoryImpl implements DishRepository {
 
     @Override
     public List<Dish> getAll(int restaurantId) {
-        return jdbcTemplate.query("SELECT * FROM dishes WHERE restaurant_id=? ORDER BY date, description  ", ROW_MAPPER, restaurantId);
+        return jdbcTemplate.query("SELECT * FROM dishes WHERE restaurant_id=? ORDER BY date DESC, description  ", ROW_MAPPER, restaurantId);
     }
 
     @Override
