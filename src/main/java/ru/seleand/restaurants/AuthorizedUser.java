@@ -1,5 +1,6 @@
 package ru.seleand.restaurants;
 
+import ru.seleand.restaurants.model.BaseEntity;
 import ru.seleand.restaurants.model.Role;
 
 /**
@@ -7,7 +8,7 @@ import ru.seleand.restaurants.model.Role;
  */
 public class AuthorizedUser {
 
-    private static int id = 1;
+    private static int id = BaseEntity.START_SEQ;
 
     private static Role mainRole = Role.ROLE_ADMIN;
 
