@@ -13,19 +13,21 @@ import static org.junit.Assert.*;
 /**
  * Created by Asus on 10.11.2016.
  */
-@ContextConfiguration("classpath:spring/spring-app.xml")
+@ContextConfiguration({"classpath:spring/mock.xml","classpath:spring/spring-app.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InMemoryRestaurantAdminRestControllerTest {
 
     @Autowired
     private RestaurantAdminRestController controller;
 
+
     @Autowired
     private RestaurantRepository repository;
 
+
     @Before
     public void setUp() throws Exception {
-        repository.init();
+//        repository.init();
     }
 
     @Test
