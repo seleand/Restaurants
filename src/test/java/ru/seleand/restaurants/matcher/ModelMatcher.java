@@ -21,7 +21,7 @@ public class ModelMatcher<T> {
     }
 
     private static final Comparator DEFAULT_COMPARATOR =
-            (Object expected, Object actual) -> String.valueOf(expected).equals(String.valueOf(actual));
+            (Object expected, Object actual) -> expected == actual || String.valueOf(expected).equals(String.valueOf(actual));
 
     private Comparator<T> comparator;
 
