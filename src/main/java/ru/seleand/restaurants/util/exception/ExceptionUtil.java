@@ -6,6 +6,10 @@ package ru.seleand.restaurants.util.exception;
  * Date: 14.05.2014
  */
 public class ExceptionUtil {
+
+    private ExceptionUtil() {
+    }
+
     public static void checkNotFoundWithId(boolean found, int id) {
         checkNotFound(found, "id=" + id);
     }

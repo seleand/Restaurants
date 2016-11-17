@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.service.RestaurantService;
-import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.util.List;
 

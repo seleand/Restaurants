@@ -2,6 +2,7 @@ package ru.seleand.restaurants.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.repository.UserRepository;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService{
     private UserRepository repository;
     @Override
     public User save(User user) {
+        Assert.notNull(user, "user must be not null");
         return repository.save(user);
     }
 
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getByEmail(String email) throws NotFoundException {
+        Assert.notNull(email, "email must be not null");
         return ExceptionUtil.checkNotFound(repository.getByEmail(email),"email="+email);
     }
 
@@ -43,6 +46,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
+        Assert.notNull(user, "user must be not null");
         repository.save(user);
     }
 }

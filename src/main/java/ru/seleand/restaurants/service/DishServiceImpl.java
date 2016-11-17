@@ -2,6 +2,7 @@ package ru.seleand.restaurants.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.repository.DishRepository;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
@@ -18,6 +19,7 @@ public class DishServiceImpl implements DishService {
     private DishRepository repository;
     @Override
     public Dish save(Dish dish, int restaurantId) {
+        Assert.notNull(dish, "dish must be not null");
         return repository.save(dish, restaurantId);
     }
 
@@ -38,6 +40,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public void update(Dish dish, int restaurantId) {
+        Assert.notNull(dish, "dish must be not null");
         repository.save(dish, restaurantId);
     }
 }

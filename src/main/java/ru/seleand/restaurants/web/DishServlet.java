@@ -5,11 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.seleand.restaurants.model.Dish;
-import ru.seleand.restaurants.repository.DishRepository;
-import ru.seleand.restaurants.repository.RestaurantRepository;
-import ru.seleand.restaurants.util.DishUtil;
 import ru.seleand.restaurants.web.dish.DishAdminRestController;
-import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  * 07.01.2015.
  */
 public class TimeUtil {
+    private TimeUtil() {
+    }
+
     public static final DateTimeFormatter DATE_TME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
