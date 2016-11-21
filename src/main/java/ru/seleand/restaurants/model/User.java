@@ -39,8 +39,6 @@ public class User extends NamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     protected Set<Role> roles;
 
-    protected Role mainRole;
-
     public User() {
     }
 
@@ -58,15 +56,6 @@ public class User extends NamedEntity {
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
-        this.mainRole = roles.stream().findFirst().orElse(null);
-    }
-
-    public Role getMainRole() {
-        return mainRole;
-    }
-
-    public void setMainRole(Role mainRole) {
-        this.mainRole = mainRole;
     }
 
     public String getEmail() {
