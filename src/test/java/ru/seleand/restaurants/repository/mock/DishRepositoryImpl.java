@@ -57,11 +57,11 @@ public class DishRepositoryImpl implements DishRepository {
 
     @Override
     public void init() {
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо1", 5015, 1), 1);
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо2", 5000, 1), 1);
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо3", 50015, 1), 1);
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо4", 7000, 2), 2);
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо5", 6005, 2), 2);
-        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо6", 5015, 2), 2);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо1", 5015), 1);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо2", 5000), 1);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо3", 50015), 1);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо4", 7000), 2);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо5", 6005), 2);
+        save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо6", 5015), 2);
     }
 }

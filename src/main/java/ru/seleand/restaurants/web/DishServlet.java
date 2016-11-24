@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.seleand.restaurants.model.Dish;
+import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.web.dish.DishAdminRestController;
 
 import javax.servlet.ServletConfig;
@@ -53,13 +54,15 @@ public class DishServlet extends javax.servlet.http.HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         int restaurantId = getParameterInt(request,"restaurantId");
+/*
+        User ref = em.getReference(User.class, id);
+*/
         double priceDouble = Double.valueOf(request.getParameter("price"))*100;
         int price = (int) priceDouble;
         Dish dish= new Dish(id.isEmpty() ? null : Integer.valueOf(id),
                 LocalDate.parse(request.getParameter("date")),
                 request.getParameter("description"),
-                price,
-                restaurantId);
+                price);
 
         LOG.info(dish.isNew() ? "Create {}" : "Update {}", dish);
         restController.save(dish, restaurantId);
@@ -86,7 +89,7 @@ public class DishServlet extends javax.servlet.http.HttpServlet {
 
         } else if ("create".equals(action) || "update".equals(action)) {
             final Dish dish = action.equals("create") ?
-                    new Dish(LocalDate.now(), restaurantId) :
+                    new Dish(LocalDate.now()) :
                     restController.get(getParameterInt(request, "id"), restaurantId);
             request.setAttribute("dish", dish);
             request.getRequestDispatcher("dishEdit.jsp").forward(request, response);
