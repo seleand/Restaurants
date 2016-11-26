@@ -34,7 +34,7 @@
     <jsp:useBean id="dish" type="ru.seleand.restaurants.model.Dish" scope="request"/>
     <form method="post" action="dishes">
         <input type="hidden" name="id" value="${dish.id}">
-        <input type="hidden" name="restaurantId" value="${dish.restaurantId}">
+        <input type="hidden" name="restaurantId" value="${restaurantId}">
         <dl>
             <dt>Date:</dt>
             <dd><input type="date" value="${dish.date}" name="date"></dd>

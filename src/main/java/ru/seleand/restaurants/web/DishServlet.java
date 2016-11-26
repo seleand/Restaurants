@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.seleand.restaurants.model.Dish;
+import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.web.dish.DishAdminRestController;
+import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -92,6 +94,7 @@ public class DishServlet extends javax.servlet.http.HttpServlet {
                     new Dish(LocalDate.now()) :
                     restController.get(getParameterInt(request, "id"), restaurantId);
             request.setAttribute("dish", dish);
+            request.setAttribute("restaurantId", restaurantId);
             request.getRequestDispatcher("dishEdit.jsp").forward(request, response);
         }
     }
