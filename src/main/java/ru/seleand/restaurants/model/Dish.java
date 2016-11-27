@@ -31,7 +31,7 @@ public class Dish extends BaseEntity{
     @Digits(fraction = 2, integer = 10)
     private int price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 /*
