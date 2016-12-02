@@ -34,5 +34,10 @@
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>
+            ru.seleand.restaurants.RestaurantsServletContextListener
+        </listener-class>
+    </listener>
 
 </web-app>

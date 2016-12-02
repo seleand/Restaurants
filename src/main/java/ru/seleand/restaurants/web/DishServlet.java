@@ -2,8 +2,11 @@ package ru.seleand.restaurants.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.model.User;
@@ -11,6 +14,7 @@ import ru.seleand.restaurants.web.dish.DishAdminRestController;
 import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,36 +25,34 @@ import java.util.Objects;
 /**
  * Created by Asus on 01.11.2016.
  */
+@Component
 public class DishServlet extends javax.servlet.http.HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(DishServlet.class);
 //    private DishRepository repository;
 
-    private ConfigurableApplicationContext springContext;
+//    private ConfigurableApplicationContext springContext;
+    @Autowired
     private DishAdminRestController restController;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
-        restController = springContext.getBean(DishAdminRestController.class);
+/*
+        ServletContext servletContext = config.getServletContext();
+        servletContext.getAttribute("org.springframework.web.context.WebApplicationContext.ROOT");
+*/
+//        restController = springContext.getBean(DishAdminRestController.class);
 //        DishRepository repository = springContext.getBean(DishRepositoryImpl.class);
 //        repository.init();
     }
 
     @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
-    }
-
-/*
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        repository = new DishRepositoryImpl();
-        repository.init();
-    }
-*/
+//    public void destroy() {
+//        springContext.close();
+//        super.destroy();
+//    }
+//*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
