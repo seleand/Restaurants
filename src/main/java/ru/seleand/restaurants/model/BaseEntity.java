@@ -1,5 +1,8 @@
 package ru.seleand.restaurants.model;
 
+import org.hibernate.Hibernate;
+import org.springframework.data.domain.Persistable;
+
 import javax.persistence.*;
 
 /**
@@ -8,13 +11,14 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class BaseEntity {
+public class BaseEntity implements Persistable<Integer> {
 
     public static final int START_SEQ = 100000;
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @Access(value = AccessType.PROPERTY)
     protected Integer id;
 
     public BaseEntity() {
@@ -28,10 +32,12 @@ public class BaseEntity {
         this.id = id;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public boolean isNew() {
         return (this.id == null);
     }
@@ -41,18 +47,16 @@ public class BaseEntity {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
         BaseEntity that = (BaseEntity) o;
-        if (id == null || that.id == null) {
-            return false;
-        }
-        return id.equals(that.id);
+
+        return null != getId() && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return (id == null) ? 0 : id;
+        return (getId() == null) ? 0 : getId();
     }
 }
