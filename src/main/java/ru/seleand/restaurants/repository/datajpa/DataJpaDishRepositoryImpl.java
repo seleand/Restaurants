@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.seleand.restaurants.model.Dish;
@@ -32,8 +33,9 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
 
     @Override
     public Dish get(int id, int restaurantId) {
-        Dish dish = crudRepository.findOne(id);
-        return dish!=null&&dish.getRestaurant().getId()==restaurantId ? dish : null;
+//        Dish dish = crudRepository.findOne(id);
+        List<Dish> dishes  = crudRepository.get(id, restaurantId);
+        return DataAccessUtils.singleResult(dishes);
     }
 
     @Override
