@@ -34,9 +34,24 @@
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>
+            postgres,datajpa
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring-app.xml
+            classpath:spring/spring-db.xml
+        </param-value>
+    </context-param>
+
     <listener>
         <listener-class>
-            ru.seleand.restaurants.RestaurantsServletContextListener
+            org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
 

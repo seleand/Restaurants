@@ -2,44 +2,32 @@ package ru.seleand.restaurants.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
-import ru.seleand.restaurants.Profiles;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.web.restaurant.RestaurantAdminRestController;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-/**
- * Created by Asus on 01.11.2016.
- */
-@Component
 public class RestaurantServlet extends javax.servlet.http.HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(RestaurantServlet.class);
 //    private RestaurantRepository repository;
 
 //    private ConfigurableApplicationContext springContext;
-    @Autowired
     private RestaurantAdminRestController restController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-/*
-        springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring-app.xml", "spring/spring-db.xml"}, false);
-        springContext.getEnvironment().setActiveProfiles(Profiles.ACTIVE_DB, Profiles.DB_IMPLEMENTATION);
-        springContext.refresh();
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         restController = springContext.getBean(RestaurantAdminRestController.class);
-*/
-//        RestaurantRepository repository = springContext.getBean(RestaurantRepositoryImpl.class);
-//        repository.init();
     }
 
     @Override
