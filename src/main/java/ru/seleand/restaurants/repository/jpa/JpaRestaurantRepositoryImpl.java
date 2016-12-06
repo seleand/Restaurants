@@ -43,8 +43,4 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
         return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
     }
 
-    @Override
-    public void init() {
-
-    }
 }

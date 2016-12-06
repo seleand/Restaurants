@@ -35,8 +35,10 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
         return crudRepository.findAll(SORT_NAME);
     }
 
-    @Override
-    public void init() {
 
+    @Override
+    public Restaurant getWithDishes(int id) {
+        return crudRepository.getWithDishes(id);
     }
+
 }

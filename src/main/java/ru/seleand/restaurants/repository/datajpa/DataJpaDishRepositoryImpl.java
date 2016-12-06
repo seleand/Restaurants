@@ -46,8 +46,10 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
         return crudRepository.findAll(restaurantId);
     }
 
-    @Override
-    public void init() {
 
+    @Override
+    public Dish getWithRestaurant(int id, int userId) {
+        return crudRepository.getWithRestaurant(id, userId);
     }
+
 }

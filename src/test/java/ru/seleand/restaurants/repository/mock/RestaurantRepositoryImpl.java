@@ -49,7 +49,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
                 .collect(Collectors.toList());
     }
 
-    @Override
     public void init() {
         save(new Restaurant(1,"restaurant 1"));
         save(new Restaurant(2,"restaurant 2"));

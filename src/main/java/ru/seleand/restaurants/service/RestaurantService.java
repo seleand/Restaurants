@@ -19,4 +19,7 @@ public interface RestaurantService {
 
     void update(Restaurant restaurant);
 
+
+    Restaurant getWithDishes(int id);
+
 }

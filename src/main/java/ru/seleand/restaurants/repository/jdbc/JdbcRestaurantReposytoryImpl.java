@@ -70,8 +70,4 @@ public class JdbcRestaurantReposytoryImpl implements RestaurantRepository {
         return jdbcTemplate.query("SELECT * FROM restaurants ORDER BY name", ROW_MAPPER);
     }
 
-    @Override
-    public void init() {
-
-    }
 }

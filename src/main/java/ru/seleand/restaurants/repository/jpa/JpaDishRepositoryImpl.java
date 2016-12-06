@@ -50,8 +50,4 @@ public class JpaDishRepositoryImpl implements DishRepository {
         return em.createNamedQuery(Dish.ALL_SORTED, Dish.class).setParameter("restaurantId", restaurantId).getResultList();
     }
 
-    @Override
-    public void init() {
-
-    }
 }

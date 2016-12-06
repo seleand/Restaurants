@@ -76,8 +76,4 @@ public class JdbcDishRepositoryImpl implements DishRepository {
         return jdbcTemplate.query("SELECT * FROM dishes WHERE restaurant_id=? ORDER BY date DESC, description  ", ROW_MAPPER, restaurantId);
     }
 
-    @Override
-    public void init() {
-
-    }
 }

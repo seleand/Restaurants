@@ -43,4 +43,10 @@ public class DishServiceImpl implements DishService {
         Assert.notNull(dish, "dish must be not null");
         repository.save(dish, restaurantId);
     }
+
+    @Override
+    public Dish getWithRestaurant(int id, int userId) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getWithRestaurant(id, userId), id);
+    }
+
 }

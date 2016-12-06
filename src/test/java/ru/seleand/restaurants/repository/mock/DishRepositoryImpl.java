@@ -55,7 +55,6 @@ public class DishRepositoryImpl implements DishRepository {
         return dishMap.values().stream().sorted(DISH_COMPARATOR).collect(Collectors.toList());
     }
 
-    @Override
     public void init() {
         save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо1", 5015), 1);
         save(new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо2", 5000), 1);

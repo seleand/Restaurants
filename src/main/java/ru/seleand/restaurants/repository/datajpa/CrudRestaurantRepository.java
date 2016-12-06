@@ -27,4 +27,8 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
 
     @Override
     List<Restaurant> findAll(Sort sort);
+
+    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.dishes WHERE r.id = ?1")
+    Restaurant getWithDishes(int id);
+
 }
