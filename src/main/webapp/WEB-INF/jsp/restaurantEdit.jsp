@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="resources/css/style2.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>
+    <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
     <h3><fmt:message key="${param.action == 'create' ? restaurants.create : restaurants.edit}"/></h3>
     <hr>
     <jsp:useBean id="restaurant" type="ru.seleand.restaurants.model.Restaurant" scope="request"/>

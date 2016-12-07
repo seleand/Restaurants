@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="resources/css/style1.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>
+    <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
     <h3><fmt:message key="restaurants.title"/></h3>
     <a href="restaurants?action=create"><fmt:message key="restaurants.add"/></a>
     <hr>
