@@ -14,8 +14,8 @@ import java.io.IOException;
 /**
  * Created by Asus on 10.11.2016.
  */
-public class usertServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(usertServlet.class);
+public class userServlet extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(userServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userId = Integer.valueOf(request.getParameter("userId"));

@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Restaurants</title>
 </head>
 <body>
-
-<!--
-<ul>
-    <li><a href="restaurants">Restaurant list</a></li>
-    &lt;!&ndash;<li><a href="dishes">Dish list</a></li>&ndash;&gt;
-</ul>
--->
 
 <hr>
 <form method="post" action="users">

@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Dish</title>
-    <link rel="stylesheet" href="css/style2.css">
+    <link rel="stylesheet" href="../../css/style2.css">
 <%--
     <style>
         dl {
@@ -28,7 +28,7 @@
 </head>
 <body>
 <section>
-    <h2><a href="index.html">Home</a></h2>
+    <h2><a href="index.jsp">Home</a></h2>
     <h3>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h3>
     <hr>
     <jsp:useBean id="dish" type="ru.seleand.restaurants.model.Dish" scope="request"/>
