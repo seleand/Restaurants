@@ -5,18 +5,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Restaurants</title>
+    <title><fmt:message key="app.title"/></title>
 </head>
 <body>
 
 <hr>
 <form method="post" action="users">
-    <b>Restaurant list of&nbsp;</b>
+    <fmt:message key="app.login"/>:
     <select name="userId">
         <option value="100000">User</option>
         <option value="100001">Admin</option>
     </select>
-    <button type="submit">Select</button>
+    <button type="submit"><fmt:message key="common.select"/></button>
 </form>
 
 </body>

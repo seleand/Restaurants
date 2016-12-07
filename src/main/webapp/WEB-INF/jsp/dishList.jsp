@@ -5,61 +5,21 @@
 
 <html>
 <head>
-    <title>Dish list</title>
-    <link rel="stylesheet" href="../../css/style1.css">
-<%--
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #49c7cc;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
---%>
+    <title><fmt:message key="dishes.title"/></title>
+    <link rel="stylesheet" href="resources/css/style1.css">
 </head>
 <body>
 <section>
-    <h2><a href="index.jsp">Home</a></h2>
-    <h3>Dish list</h3>
-    <a href="dishes?action=create&restaurantId=${restaurantId}">Add dish</a>
+    <h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>
+    <h3><fmt:message key="dishes.title"/></h3>
+    <a href="dishes?action=create&restaurantId=${restaurantId}"><fmt:message key="dishes.add"/></a>
     <hr>
     <table class="tg">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th><fmt:message key="dishes.date"/></th>
+            <th><fmt:message key="dishes.description"/></th>
+            <th><fmt:message key="dishes.price"/></th>
             <th></th>
             <th></th>
         </tr>
@@ -74,12 +34,12 @@
                 </td>
                 <td>${dish.description}</td>
                 <td><fmt:formatNumber type="number" minFractionDigits="2" value="${dish.price/100}"/></td>
-                <td><a href="dishes?action=update&id=${dish.id}&restaurantId=${restaurantId}">Update</a></td>
-                <td><a href="dishes?action=delete&id=${dish.id}&restaurantId=${restaurantId}">Delete</a></td>
+                <td><a href="dishes?action=update&id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.update"/></a></td>
+                <td><a href="dishes?action=delete&id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.delete"/></a></td>
             </tr>
         </c:forEach>
     </table>
-    <a href="restaurants">Restaurant list</a>
+    <a href="restaurants"><fmt:message key="restaurants.title"/></a>
 </section>
 
 </body>
