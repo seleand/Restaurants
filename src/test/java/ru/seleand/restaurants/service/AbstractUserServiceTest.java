@@ -2,15 +2,8 @@ package ru.seleand.restaurants.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ru.seleand.restaurants.Profiles;
 import ru.seleand.restaurants.model.Role;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.util.exception.NotFoundException;

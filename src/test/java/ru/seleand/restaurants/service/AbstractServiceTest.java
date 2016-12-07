@@ -20,6 +20,7 @@ import static ru.seleand.restaurants.Profiles.ACTIVE_DB;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-mvc.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)

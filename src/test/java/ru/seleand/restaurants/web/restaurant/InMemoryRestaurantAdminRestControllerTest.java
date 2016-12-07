@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Asus on 10.11.2016.
  */
-@ContextConfiguration({"classpath:spring/mock.xml","classpath:spring/spring-app.xml"})
+@ContextConfiguration({"classpath:spring/mock.xml","classpath:spring/spring-app.xml","classpath:spring/spring-mvc.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InMemoryRestaurantAdminRestControllerTest {
 
