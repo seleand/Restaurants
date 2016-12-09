@@ -3,15 +3,13 @@ package ru.seleand.restaurants.web.dish;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.service.DishService;
 
 import java.util.List;
 
-@Controller
-public class DishAdminRestController {
-    private static final Logger LOG = LoggerFactory.getLogger(DishAdminRestController.class);
+public class AbstractDishController {
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractDishController.class);
 
     @Autowired
     private DishService service;

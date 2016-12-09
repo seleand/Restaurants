@@ -9,12 +9,8 @@ import ru.seleand.restaurants.service.RestaurantService;
 
 import java.util.List;
 
-/**
- * Created by Asus on 05.11.2016.
- */
-@Controller
-public class RestaurantAdminRestController {
-    private static final Logger LOG = LoggerFactory.getLogger(RestaurantAdminRestController.class);
+public abstract class AbstractRestaurantController {
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractRestaurantController.class);
 
     @Autowired
     private RestaurantService service;

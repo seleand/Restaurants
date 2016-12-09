@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>--%>
 
 <html>
 <head>
     <title><fmt:message key="dishes.title"/></title>
+    <c:set var="url">${pageContext.request.requestURL}</c:set>
+    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
     <link rel="stylesheet" href="resources/css/style1.css">
 </head>
 <body>
@@ -13,7 +16,7 @@
 <section>
     <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
     <h3><fmt:message key="dishes.title"/></h3>
-    <a href="dishes?action=create&restaurantId=${restaurantId}"><fmt:message key="dishes.add"/></a>
+    <a href="dishes/create?restaurantId=${restaurantId}"><fmt:message key="dishes.add"/></a>
     <hr>
     <table class="tg">
         <thead>
@@ -35,8 +38,8 @@
                 </td>
                 <td>${dish.description}</td>
                 <td><fmt:formatNumber type="number" minFractionDigits="2" value="${dish.price/100}"/></td>
-                <td><a href="dishes?action=update&id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.update"/></a></td>
-                <td><a href="dishes?action=delete&id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.delete"/></a></td>
+                <td><a href="dishes/update?id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.update"/></a></td>
+                <td><a href="dishes/delete?id=${dish.id}&restaurantId=${restaurantId}"><fmt:message key="common.delete"/></a></td>
             </tr>
         </c:forEach>
     </table>

@@ -5,38 +5,6 @@
          version="3.1">
     <display-name>Restaurants</display-name>
 
-<!--
-    <servlet>
-        <servlet-name>restaurantServlet</servlet-name>
-        <servlet-class>ru.seleand.restaurants.web.RestaurantServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>restaurantServlet</servlet-name>
-        <url-pattern>/restaurants</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>dishServlet</servlet-name>
-        <servlet-class>ru.seleand.restaurants.web.DishServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dishServlet</servlet-name>
-        <url-pattern>/dishes</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>ru.seleand.restaurants.web.usertServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
--->
-
     <context-param>
         <param-name>spring.profiles.default</param-name>
         <param-value>
@@ -69,5 +37,23 @@
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

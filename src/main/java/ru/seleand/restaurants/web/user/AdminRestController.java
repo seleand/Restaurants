@@ -5,10 +5,6 @@ import ru.seleand.restaurants.model.User;
 
 import java.util.List;
 
-/**
- * GKislin
- * 06.03.2015.
- */
 @Controller
 public class AdminRestController extends AbstractUserController {
 

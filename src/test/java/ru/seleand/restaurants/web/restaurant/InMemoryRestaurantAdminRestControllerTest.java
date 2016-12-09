@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class InMemoryRestaurantAdminRestControllerTest {
 
     @Autowired
-    private RestaurantAdminRestController controller;
+    private RestaurantRestController controller;
 
 
     @Autowired
