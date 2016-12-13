@@ -45,11 +45,11 @@ public class JspRestaurantController extends AbstractRestaurantController{
         Restaurant restaurant = new Restaurant(id.isEmpty() ? null : Integer.valueOf(id),
                 request.getParameter("name"));
 
-//        if (restaurant.isNew()) {
-            super.save(restaurant);
-//        } else {
-//            super.update(userMeal, userMeal.getId());
-//        }
+        if (restaurant.isNew()) {
+            super.create(restaurant);
+        } else {
+            super.update(restaurant, restaurant.getId());
+        }
         return "redirect:/restaurants";
     }
 

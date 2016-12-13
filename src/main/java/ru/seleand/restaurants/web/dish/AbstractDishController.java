@@ -14,8 +14,9 @@ public class AbstractDishController {
     @Autowired
     private DishService service;
 
-    public Dish save(Dish dish, int restaurantId) {
-        LOG.info("Save dish {} for restaurant with id {}",dish,restaurantId);
+    public Dish create(Dish dish, int restaurantId) {
+        dish.setId(null);
+        LOG.info("Create dish {} for restaurant with id {}",dish,restaurantId);
         return service.save(dish, restaurantId);
     }
 
@@ -34,7 +35,8 @@ public class AbstractDishController {
         return service.getAll(restaurantId);
     }
 
-    public void update(Dish dish, int restaurantId) {
+    public void update(Dish dish, int id, int restaurantId) {
+        dish.setId(id);
         LOG.info("Update dish {} for reastaurant with id {}", dish, restaurantId);
         service.update(dish, restaurantId);
     }

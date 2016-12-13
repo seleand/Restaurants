@@ -59,7 +59,12 @@ public class JspDishController extends AbstractDishController {
                 LocalDate.parse(request.getParameter("date")),
                 request.getParameter("description"),
                 price);
-        super.save(dish,restaurantId);
+        if (dish.isNew()) {
+            super.create(dish, restaurantId);
+        }
+        else {
+            super.update(dish,restaurantId);
+        }
 //        model.addAttribute("restaurantId", restaurantId);
 //        return "dishList?restaurantId="+restaurantId;
         return "redirect:/dishes?restaurantId="+restaurantId;

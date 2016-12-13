@@ -15,8 +15,9 @@ public abstract class AbstractRestaurantController {
     @Autowired
     private RestaurantService service;
 
-    public Restaurant save(Restaurant restaurant){
-        LOG.info("Save restaurant {}", restaurant);
+    public Restaurant create(Restaurant restaurant){
+        restaurant.setId(null);
+        LOG.info("Create restaurant {}", restaurant);
         return service.save(restaurant);
     }
 
@@ -35,7 +36,8 @@ public abstract class AbstractRestaurantController {
         return service.getAll();
     }
 
-    public void update(Restaurant restaurant) {
+    public void update(Restaurant restaurant, int id) {
+        restaurant.setId(id);
         LOG.info("Update restaursnt {}",restaurant);
         service.update(restaurant);
     }
