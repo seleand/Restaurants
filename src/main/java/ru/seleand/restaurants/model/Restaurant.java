@@ -1,5 +1,6 @@
 package ru.seleand.restaurants.model;
 
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Restaurant extends NamedEntity{
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("date DESC, description")
+//    @JsonIgnore
     protected List<Dish> dishes;
 
 

@@ -63,7 +63,7 @@ public class JspDishController extends AbstractDishController {
             super.create(dish, restaurantId);
         }
         else {
-            super.update(dish,restaurantId);
+            super.update(dish,Integer.valueOf(id),restaurantId);
         }
 //        model.addAttribute("restaurantId", restaurantId);
 //        return "dishList?restaurantId="+restaurantId;

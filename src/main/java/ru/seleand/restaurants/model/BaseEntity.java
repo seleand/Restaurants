@@ -5,12 +5,10 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
-/**
- * User: gkislin
- * Date: 22.08.2014
- */
+
 @MappedSuperclass
 @Access(AccessType.FIELD)
+//@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class BaseEntity implements Persistable<Integer> {
 
     public static final int START_SEQ = 100000;

@@ -33,6 +33,7 @@ public class Dish extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
+//    @JsonIgnore
     private Restaurant restaurant;
 /*
     private int restaurantId;
@@ -118,7 +119,6 @@ public class Dish extends BaseEntity{
                 "date=" + date +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", restaurant=" + restaurant +
                 '}';
     }
 }

@@ -23,7 +23,8 @@ public class DishRestController extends AbstractDishController{
 
     @GetMapping(value = "/{restaurantId}/dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish get(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
-        return super.get(id, restaurantId);
+        Dish dish = super.get(id, restaurantId);
+        return dish;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
