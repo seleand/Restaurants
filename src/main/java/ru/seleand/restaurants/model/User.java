@@ -6,12 +6,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
@@ -68,7 +66,7 @@ public class User extends NamedEntity {
         this.email = email;
         this.password = password;
         this.enabled = enabled;
-        this.roles = roles;
+        setRoles(roles);
     }
 
     public String getEmail() {
@@ -104,7 +102,7 @@ public class User extends NamedEntity {
     }
 
     public void setRoles(Collection<Role> roles) {
-        this.roles = EnumSet.copyOf(roles);
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);
     }
 
     public String getPassword() {

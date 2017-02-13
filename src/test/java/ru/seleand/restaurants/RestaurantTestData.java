@@ -9,7 +9,7 @@ import static ru.seleand.restaurants.model.BaseEntity.START_SEQ;
  * Created by Asus on 15.12.2016.
  */
 public class RestaurantTestData {
-    public static final ModelMatcher<Restaurant> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Restaurant> MATCHER = new ModelMatcher<>(Restaurant.class);
 
     public static final int RESTAURANT_ID = START_SEQ+2;
 
