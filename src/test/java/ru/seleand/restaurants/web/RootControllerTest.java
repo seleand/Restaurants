@@ -1,19 +1,16 @@
-package ru.seleand.restaurants.web.restaurant;
+package ru.seleand.restaurants.web;
 
 import org.junit.Test;
-import ru.seleand.restaurants.web.AbstractControllerTest;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.seleand.restaurants.UserTestData.USER;
-import static ru.seleand.restaurants.model.BaseEntity.START_SEQ;
 
 public class RootControllerTest extends AbstractControllerTest {
 
     @Test
-    public void testUsers() throws Exception {
+    public void testRestaurants() throws Exception {
         mockMvc.perform(get("/restaurants"))
                 .andDo(print())
                 .andExpect(status().isOk())

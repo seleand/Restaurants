@@ -5,12 +5,15 @@
 <%--<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>--%>
 
 <html>
+<%--
 <head>
     <title><fmt:message key="dishes.title"/></title>
     <c:set var="url">${pageContext.request.requestURL}</c:set>
     <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
     <link rel="stylesheet" href="resources/css/style1.css">
 </head>
+--%>
+<jsp:include page="fragments/headTag1.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
