@@ -15,30 +15,49 @@
 <jsp:include page="fragments/headTag1.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-<section>
-    <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
-    <h3><fmt:message key="restaurants.title"/></h3>
-    <a href="restaurants/create"><fmt:message key="restaurants.add"/></a>
-    <hr>
-    <table class="tg">
-        <thead>
-        <tr>
-            <th><fmt:message key="restaurants.description"/></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <c:forEach items="${restaurantList}" var="restaurant">
-            <jsp:useBean id="restaurant" scope="page" type="ru.seleand.restaurants.model.Restaurant"/>
-            <tr>
-                <td>${restaurant.name}</td>
-                <td><a href="dishes?restaurantId=${restaurant.id}"><fmt:message key="restaurants.dishes"/></a></td>
-                <td><a href="restaurants/update?id=${restaurant.id}"><fmt:message key="common.update"/></a></td>
-                <td><a href="restaurants/delete?id=${restaurant.id}"><fmt:message key="common.delete"/></a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</section>
+<div class="jumbotron">
+    <div class="container">
+        <div class="shadow">
+            <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
+            <h3><fmt:message key="restaurants.title"/></h3>
+
+            <div class="view-box">
+                <a href="restaurants/create" class="btn btn-sm btn-info"><fmt:message key="restaurants.add"/></a>
+
+
+                <%--<a href="restaurants/create"><fmt:message key="restaurants.add"/></a>--%>
+                <%--<hr>--%>
+                <%--<table class="tg">--%>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><fmt:message key="restaurants.description"/></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <c:forEach items="${restaurantList}" var="restaurant">
+                        <jsp:useBean id="restaurant" scope="page" type="ru.seleand.restaurants.model.Restaurant"/>
+                        <tr>
+                            <td>${restaurant.name}</td>
+                            <td><a href="dishes?restaurantId=${restaurant.id}"
+                                   class="btn btn-xs btn-primary"><fmt:message key="restaurants.dishes"/></a></td>
+                            <td><a href="restaurants/update?id=${restaurant.id}"
+                                   class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
+                            <td><a href="restaurants/delete?id=${restaurant.id}"
+                                   class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
+                                <%--
+                                                <td><a href="dishes?restaurantId=${restaurant.id}"><fmt:message key="restaurants.dishes"/></a></td>
+                                                <td><a href="restaurants/update?id=${restaurant.id}"><fmt:message key="common.update"/></a></td>
+                                                <td><a href="restaurants/delete?id=${restaurant.id}"><fmt:message key="common.delete"/></a></td>
+                                --%>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
