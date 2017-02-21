@@ -37,7 +37,7 @@ public class BaseEntity implements Persistable<Integer> {
 
     @Override
     public boolean isNew() {
-        return (this.id == null);
+        return (getId() == null);
     }
 
     @Override
