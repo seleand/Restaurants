@@ -116,27 +116,27 @@
 
     // $(document).ready(function () {
     $(function () {
-        datatableApi = $('#datatable').dataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
+        datatableApi = $('#datatable').DataTable({
+            "paging": false,
+            "info": false,
+            "columns": [
                 {
-                    "mData": "name"
+                    "data": "name"
                 },
                 {
                     "sDefaultContent": "",
                     "bSortable": false
                 },
                 {
-                    "sDefaultContent": "<fmt:message key="common.update"/>",
-                    "bSortable": false
+                    "defaultContent": "<fmt:message key="common.update"/>",
+                    "orderable": false
                 },
                 {
-                    "sDefaultContent": "<fmt:message key="common.delete"/>",
-                    "bSortable": false
+                    "defaultContent": "<fmt:message key="common.delete"/>",
+                    "orderable": false
                 }
             ],
-            "aaSorting": [
+            "order": [
                 [
                     0,
                     "asc"
