@@ -49,12 +49,12 @@
  <%--                           <td><a href="restaurants/update?id=${restaurant.id}"
                                    class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
  --%>
-                            <td><a class="btn btn-xs btn-primary edit" id="${restaurant.id}"><fmt:message key="common.update"/></a></td>
+                            <td><a class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
 <%--
                             <td><a href="restaurants/delete?id=${restaurant.id}"
                                    class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
 --%>
-                            <td><a class="btn btn-xs btn-danger delete" id="${restaurant.id}"><fmt:message key="common.delete"/></a></td>
+                            <td><a class="btn btn-xs btn-danger" onclick="deleteRow(${restaurant.id})"><fmt:message key="common.delete"/></a></td>
 
                                 <%--
                                                 <td><a href="dishes?restaurantId=${restaurant.id}"><fmt:message key="restaurants.dishes"/></a></td>
@@ -90,7 +90,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary"><fmt:message key="common.save"/></button>
+                            <button class="btn btn-primary" type="button" onclick="save()"><fmt:message key="common.save"/></button>
                         </div>
                     </div>
                 </form>
@@ -109,6 +109,10 @@
 
     var ajaxUrl = 'ajax/restaurants/';
     var datatableApi;
+
+    function updateTable() {
+        $.get(ajaxUrl, updateTableByData);
+    }
 
     // $(document).ready(function () {
     $(function () {

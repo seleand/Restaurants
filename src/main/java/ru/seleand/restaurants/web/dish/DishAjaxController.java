@@ -1,18 +1,17 @@
 package ru.seleand.restaurants.web.dish;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.seleand.restaurants.model.Dish;
 
-import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(AjaxDishController.REST_URL)
-public class AjaxDishController extends AbstractDishController{
+@RequestMapping(DishAjaxController.REST_URL)
+public class DishAjaxController extends AbstractDishController{
     static final String REST_URL = "/ajax/dishes";
 
     @GetMapping(value = "/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,27 +19,24 @@ public class AjaxDishController extends AbstractDishController{
         return super.getAll(restaurantId);
     }
 
-/*
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish) {
-        int restaurantId = dish.getRestaurant().getId();
-        Dish created = super.create(dish, restaurantId);
-
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{restaurantId}/dish/{id}")
-                .buildAndExpand(restaurantId, created.getId()).toUri();
-
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setLocation(uriOfNewResource);
-
-        return ResponseEntity.created(uriOfNewResource).body(created);
-    }
-*/
-
 
     @DeleteMapping(value = "/{restaurantId}/dish/{id}")
     public void delete(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
         super.delete(id, restaurantId);
+    }
+
+    @PostMapping
+    public void updateOrCreate(@RequestParam("id") Integer id,
+                               @RequestParam("restaurantId") Integer restaurantId,
+                               @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                               @RequestParam("description") String description,
+                               @RequestParam("price") int price) {
+        Dish dish = new Dish(id, date, description, price);
+        if (dish.isNew()) {
+            super.create(dish,restaurantId);
+        } else {
+            super.update(dish, id, restaurantId);
+        }
     }
 
 /*

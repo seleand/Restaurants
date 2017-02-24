@@ -11,6 +11,7 @@ import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Controller
 public class RootController {
@@ -27,6 +28,15 @@ public class RootController {
     public String root() {
         return "index";
     }
+
+    @RequestMapping(value = "/dishes", method = RequestMethod.GET)
+    public String getAll(HttpServletRequest request, Model model) {
+        int restaurantId = getParameterInt(request,"restaurantId");
+        model.addAttribute("dishList", dishService.getAll(restaurantId));
+        model.addAttribute("restaurantId",restaurantId);
+        return "dishList";
+    }
+
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String users(Model model) {
@@ -45,6 +55,10 @@ public class RootController {
     public String restaurants(Model model) {
         model.addAttribute("restaurantList", restaurantService.getAll());
         return "restaurantList";
+    }
+    private int getParameterInt(HttpServletRequest request, String parameterName) {
+        String param = Objects.requireNonNull(request.getParameter(parameterName));
+        return Integer.valueOf(param);
     }
 
 }
