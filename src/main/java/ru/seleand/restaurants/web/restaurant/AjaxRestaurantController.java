@@ -56,6 +56,11 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
         super.delete(id);
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant get(@PathVariable("id") int id) {
+        return super.get(id);
+    }
+
 /*
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Restaurant restaurant, @PathVariable("id") int id) {

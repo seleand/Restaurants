@@ -12,25 +12,18 @@ function add() {
     $('#editRow').modal();
 }
 
-function addDish(restaurantId) {
-    form.find(":input").val(restaurantId).val("");
-    $('#editRow').modal();
+function updateRow(id) {
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
+    });
 }
 
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
-        type: 'DELETE',
-        success: function () {
-            updateTable();
-            successNoty('Deleted');
-        }
-    });
-}
-
-function deleteDishRow(restaurantId, id) {
-    $.ajax({
-        url: ajaxUrl + restaurantId+'/dish/' + id,
         type: 'DELETE',
         success: function () {
             updateTable();

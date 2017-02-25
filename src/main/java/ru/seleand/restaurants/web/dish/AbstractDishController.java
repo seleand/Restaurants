@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.service.DishService;
+import ru.seleand.restaurants.to.DishTo;
 
 import java.util.List;
 
@@ -39,5 +40,10 @@ public class AbstractDishController {
         dish.setId(id);
         LOG.info("Update dish {} for reastaurant with id {}", dish, restaurantId);
         service.update(dish, restaurantId);
+    }
+
+    public void update(DishTo dishTo) {
+        LOG.info("Update dish from to {}", dishTo);
+        service.update(dishTo);
     }
 }

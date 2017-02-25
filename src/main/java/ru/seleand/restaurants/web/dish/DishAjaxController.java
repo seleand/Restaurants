@@ -1,12 +1,12 @@
 package ru.seleand.restaurants.web.dish;
 
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.seleand.restaurants.model.Dish;
+import ru.seleand.restaurants.to.DishTo;
+import ru.seleand.restaurants.util.DishUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,6 +19,11 @@ public class DishAjaxController extends AbstractDishController{
         return super.getAll(restaurantId);
     }
 
+    @GetMapping(value = "/{restaurantId}/dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dish get(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+        Dish dish = super.get(id, restaurantId);
+        return dish;
+    }
 
     @DeleteMapping(value = "/{restaurantId}/dish/{id}")
     public void delete(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
@@ -26,16 +31,12 @@ public class DishAjaxController extends AbstractDishController{
     }
 
     @PostMapping
-    public void updateOrCreate(@RequestParam("id") Integer id,
-                               @RequestParam("restaurantId") Integer restaurantId,
-                               @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                               @RequestParam("description") String description,
-                               @RequestParam("price") int price) {
-        Dish dish = new Dish(id, date, description, price);
-        if (dish.isNew()) {
-            super.create(dish,restaurantId);
+    public void updateOrCreate(DishTo dishTo) {
+//        Dish dish = new Dish(id, date, description, price);
+        if (dishTo.isNew()) {
+            super.create(DishUtil.createNewFromTo(dishTo),dishTo.getRestaurantId());
         } else {
-            super.update(dish, id, restaurantId);
+            super.update(dishTo);
         }
     }
 

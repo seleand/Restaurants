@@ -48,7 +48,7 @@
                             <td><a href="dishes/update?id=${dish.id}&restaurantId=${restaurantId}"
                                    class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
 --%>
-                            <td><a class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
+                            <td><a class="btn btn-xs btn-primary" onclick="updateDishRow(${restaurantId},${dish.id})"><fmt:message key="common.update"/></a></td>
 <%--
                             <td><a href="dishes/delete?id=${dish.id}&restaurantId=${restaurantId}"
                                    class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
@@ -73,7 +73,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
-                    <input type="hidden" id="restaurantId" name="restaurantId" value="${restaurantId}">
+                    <input type="hidden" id="restaurantId" name="restaurantId">
                     <input type="hidden" id="id" name="id">
 <%--
                     <input id="restaurantId" name="restaurantId">
@@ -102,12 +102,12 @@
 
                         <div class="col-xs-9">
                             <input type="number" min="0.00" step="0.01" class="form-control" id="price" name="price"
-                                   placeholder="0.00" value="${dish.price/100}">
+                                   placeholder="0.00">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="save()"><fmt:message key="common.save"/></button>
+                            <button class="btn btn-primary" type="button" onclick="save(${restaurantId})"><fmt:message key="common.save"/></button>
                         </div>
                     </div>
                 </form>
@@ -122,11 +122,13 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
+<%--<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>--%>
+<script type="text/javascript" src="resources/js/dishDatatable.js"></script>
 <script type="text/javascript">
     var ajaxUrl = 'ajax/dishes/';
     var datatableApi;
 
+/*
     function updateTable() {
         $.ajax({
             type: "POST",
@@ -136,11 +138,10 @@
             success: updateTableByData
         });
     }
-/*
-    function updateTable() {
-        $.get(ajaxUrl, updateTableByData);
-    }
 */
+    function updateTable(restaurantId) {
+        $.get(ajaxUrl + restaurantId, updateTableByData);
+    }
 
 
     $(function () {

@@ -1,10 +1,42 @@
 package ru.seleand.restaurants.util;
 
 
+import ru.seleand.restaurants.model.Dish;
+import ru.seleand.restaurants.model.Restaurant;
+import ru.seleand.restaurants.to.DishTo;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * Created by Asus on 01.11.2016.
  */
 public class DishUtil {
+
+  public static Dish createNewFromTo(DishTo dishTo){
+/*
+      Date date = dishTo.getDate();
+      LocalDate localDate = LocalDate.ofEpochDay(date.getTime());
+*/
+      Double doublePrice = Double.parseDouble(dishTo.getPrice())*100;
+      Integer price = doublePrice.intValue();
+      return new Dish(null, dishTo.getDate(), dishTo.getDescription(), price);
+  }
+
+
+    public static Dish updateFromTo(Dish dish, DishTo dishTo) {
+/*
+        Date date = dishTo.getDate();
+        LocalDate localDate = LocalDate.ofEpochDay(date.getTime());
+*/
+        Double doublePrice = Double.parseDouble(dishTo.getPrice())*100;
+        Integer price = doublePrice.intValue();
+        dish.setDate(dishTo.getDate());
+        dish.setDescription(dishTo.getDescription());
+        dish.setPrice(price);
+        return dish;
+    }
+
 /*
     public static final List<Dish> DISHES = Arrays.asList(
             new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо1", 5015),

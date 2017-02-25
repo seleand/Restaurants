@@ -49,7 +49,7 @@
  <%--                           <td><a href="restaurants/update?id=${restaurant.id}"
                                    class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
  --%>
-                            <td><a class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
+                            <td><a class="btn btn-xs btn-primary"  onclick="updateRow(${restaurant.id})"><fmt:message key="common.update"/></a></td>
 <%--
                             <td><a href="restaurants/delete?id=${restaurant.id}"
                                    class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
@@ -105,6 +105,8 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
+<%--<script type="text/javascript" src="resources/js/restaurantDatatable.js"></script>--%>
+
 <script type="text/javascript">
 
     var ajaxUrl = 'ajax/restaurants/';

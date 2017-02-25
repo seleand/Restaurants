@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.service;
 
 import ru.seleand.restaurants.model.Dish;
+import ru.seleand.restaurants.to.DishTo;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface DishService {
 
     void update(Dish dish, int restaurantId);
 
+    void update(DishTo dishTo);
 
     Dish getWithRestaurant(int id, int userId);
 

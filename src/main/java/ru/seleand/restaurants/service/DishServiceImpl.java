@@ -2,9 +2,12 @@ package ru.seleand.restaurants.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.repository.DishRepository;
+import ru.seleand.restaurants.to.DishTo;
+import ru.seleand.restaurants.util.DishUtil;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
@@ -42,6 +45,14 @@ public class DishServiceImpl implements DishService {
     public void update(Dish dish, int restaurantId) {
         Assert.notNull(dish, "dish must be not null");
         repository.save(dish, restaurantId);
+    }
+
+    @Transactional
+    @Override
+    public void update(DishTo dishTo) {
+        Assert.notNull(dishTo, "dishTo must be not null");
+        Dish dish = repository.get(dishTo.getId(), dishTo.getRestaurantId());
+        repository.save(DishUtil.updateFromTo(dish,dishTo), dishTo.getRestaurantId());
     }
 
     @Override
