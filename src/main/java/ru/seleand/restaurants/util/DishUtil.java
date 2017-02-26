@@ -18,9 +18,7 @@ public class DishUtil {
       Date date = dishTo.getDate();
       LocalDate localDate = LocalDate.ofEpochDay(date.getTime());
 */
-      Double doublePrice = Double.parseDouble(dishTo.getPrice())*100;
-      Integer price = doublePrice.intValue();
-      return new Dish(null, dishTo.getDate(), dishTo.getDescription(), price);
+      return new Dish(null, dishTo.getDate(), dishTo.getDescription(), getIntPrice(dishTo));
   }
 
 
@@ -29,14 +27,20 @@ public class DishUtil {
         Date date = dishTo.getDate();
         LocalDate localDate = LocalDate.ofEpochDay(date.getTime());
 */
-        Double doublePrice = Double.parseDouble(dishTo.getPrice())*100;
-        Integer price = doublePrice.intValue();
         dish.setDate(dishTo.getDate());
         dish.setDescription(dishTo.getDescription());
-        dish.setPrice(price);
+        dish.setPrice(getIntPrice(dishTo));
         return dish;
     }
 
+    private static Integer getIntPrice(DishTo dishTo){
+        String stringPrice = dishTo.getPrice();
+        Double doublePrice = 0.;
+        if (!stringPrice.isEmpty()) {
+            doublePrice = Double.parseDouble(dishTo.getPrice()) * 100;
+        }
+        return doublePrice.intValue();
+    }
 /*
     public static final List<Dish> DISHES = Arrays.asList(
             new Dish(LocalDate.of(2015, Month.MAY, 30), "Блюдо1", 5015),
