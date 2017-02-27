@@ -2,24 +2,15 @@
  * Created by Asus on 24.02.2017.
  */
 
-var form;
-
-function makeEditable() {
-    form = $('#detailsForm');
-    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
-        failNoty(event, jqXHR, options, jsExc);
-    });
-}
-
-function addDish(restaurantId) {
+function addDish() {
     form.find(":input").val("");
-    form.find("input[id='restaurantId']").val(restaurantId);
+    form.find("input[id='restaurantId']").val(rId);
     // form.find("#id").val("");
     $('#editRow').modal();
 }
 
-function updateDishRow(restaurantId, id) {
-    $.get(ajaxUrl + restaurantId + '/dish/' + id, function (data) {
+function updateDishRow(id) {
+    $.get(ajaxUrl + '/dish/' + id, function (data) {
         $.each(data, function (key, value){
         if (key == 'price') {
             form.find("input[name='" + key + "']").val(value / 100);
@@ -28,78 +19,45 @@ function updateDishRow(restaurantId, id) {
             form.find("input[name='" + key + "']").val(value);
         }
     });
-    form.find("input[id='restaurantId']").val(restaurantId);
+    form.find("input[id='restaurantId']").val(rId);
     $('#editRow').modal();
     });
 }
 
-function deleteDishRow(restaurantId, id) {
+function deleteDishRow(id) {
     $.ajax({
-        url: ajaxUrl + restaurantId + '/dish/' + id,
+        // url: ajaxUrl + restaurantId + '/dish/' + id,
+        url: ajaxUrl + '/dish/' + id,
         type: 'DELETE',
         success: function () {
-            updateTable(restaurantId);
+            // updateTable(restaurantId);
+            updateTable();
             successNoty('Deleted');
         }
     });
 }
 
-function updateTableByData(data) {
-    datatableApi.clear().rows.add(data).draw();
-}
-
-function save(restaurantId) {
+function saveDish() {
     $.ajax({
         type: "POST",
-        url: ajaxUrl,
+        url: ajaxUrlPost,
         data: form.serialize(),
         success: function () {
             $('#editRow').modal('hide');
-            updateTable(restaurantId);
+            updateTable();
             successNoty('Saved');
         }
     });
 }
 
-var failedNote;
-
-function closeNoty() {
-    if (failedNote) {
-        failedNote.close();
-        failedNote = undefined;
-    }
-}
-
-function successNoty(text) {
-    closeNoty();
-    noty({
-        text: text,
-        type: 'success',
-        layout: 'bottomRight',
-        timeout: true
-    });
-}
-
-function failNoty(event, jqXHR, options, jsExc) {
-    closeNoty();
-    failedNote = noty({
-        text: 'Failed: ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
-        type: 'error',
-        layout: 'bottomRight'
-    });
-}
-
-/*
-var ajaxUrl = 'ajax/dishes/';
 var datatableApi;
-
-function updateTable(restaurantId) {
-    $.get(ajaxUrl + restaurantId, updateTableByData);
-}
-
 
 $(function () {
     datatableApi = $('#datatable').DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
         "paging": false,
         "info": true,
         "columns": [
@@ -110,15 +68,23 @@ $(function () {
                 "data": "description"
             },
             {
-                "data": "price"
+                "data": "price",
+                "render": function (data, type, row) {
+                    if (type == 'display') {
+                        return number_format(data/100,2,","," ");
+                    }
+                    return data;
+                }
             },
             {
-                "defaultContent": "Update",
-                "orderable": false
+                "defaultContent": "",
+                "orderable": false,
+                "render": renderDishEditBtn
             },
             {
-                "defaultContent": "Delete",
-                "orderable": false
+                "defaultContent": "",
+                "orderable": false,
+                "render": renderDishDeleteBtn
             }
         ],
         "order": [
@@ -130,4 +96,15 @@ $(function () {
     });
     makeEditable();
 });
-*/
+
+function renderDishEditBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-primary" onclick="updateDishRow(' + row.id + ');">Edit</a>';
+    }
+}
+
+function renderDishDeleteBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-danger" onclick="deleteDishRow(' + row.id + ');">Delete</a>';
+    }
+}

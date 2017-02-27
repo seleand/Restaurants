@@ -15,11 +15,15 @@ import java.util.Objects;
 
 @Controller
 public class RootController {
+/*
     @Autowired
     private RestaurantService restaurantService;
+*/
 
+/*
     @Autowired
     private DishService dishService;
+*/
 
     @Autowired
     private UserService userService;
@@ -32,7 +36,7 @@ public class RootController {
     @RequestMapping(value = "/dishes", method = RequestMethod.GET)
     public String getAll(HttpServletRequest request, Model model) {
         int restaurantId = getParameterInt(request,"restaurantId");
-        model.addAttribute("dishList", dishService.getAll(restaurantId));
+//        model.addAttribute("dishList", dishService.getAll(restaurantId));
         model.addAttribute("restaurantId",restaurantId);
         return "dishList";
     }
@@ -53,7 +57,7 @@ public class RootController {
 
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {
-        model.addAttribute("restaurantList", restaurantService.getAll());
+//        model.addAttribute("restaurantList", restaurantService.getAll());
         return "restaurantList";
     }
     private int getParameterInt(HttpServletRequest request, String parameterName) {

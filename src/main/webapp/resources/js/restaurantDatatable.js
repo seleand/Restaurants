@@ -4,30 +4,39 @@
 var ajaxUrl = 'ajax/restaurants/';
 var datatableApi;
 
+/*
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
+*/
 
 // $(document).ready(function () {
 $(function () {
     datatableApi = $('#datatable').DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
         "paging": false,
-        "info": false,
+        "info": true,
         "columns": [
             {
                 "data": "name"
             },
             {
-                "sDefaultContent": "",
-                "bSortable": false
-            },
-            {
-                "defaultContent": "Update",
+                "defaultContent": "",
+                "render": renderDishesBtn,
                 "orderable": false
             },
             {
-                "defaultContent": "Delete",
-                "orderable": false
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderEditBtn
+            },
+            {
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderDeleteBtn
             }
         ],
         "order": [
@@ -35,8 +44,15 @@ $(function () {
                 0,
                 "asc"
             ]
-        ]
-    })
-    ;
-    makeEditable();
+        ],
+        "initComplete": makeEditable
+    });
+    // makeEditable();
 });
+
+function renderDishesBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a href="dishes?restaurantId=' + row.id + '" class="btn btn-xs btn-primary">Dishes</a>';
+    }
+}
+

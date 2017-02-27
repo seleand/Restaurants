@@ -40,29 +40,31 @@
                         <th></th>
                     </tr>
                     </thead>
+<%--
                     <c:forEach items="${restaurantList}" var="restaurant">
                         <jsp:useBean id="restaurant" scope="page" type="ru.seleand.restaurants.model.Restaurant"/>
                         <tr>
                             <td>${restaurant.name}</td>
                             <td><a href="dishes?restaurantId=${restaurant.id}"
                                    class="btn btn-xs btn-primary"><fmt:message key="restaurants.dishes"/></a></td>
- <%--                           <td><a href="restaurants/update?id=${restaurant.id}"
+ &lt;%&ndash;                           <td><a href="restaurants/update?id=${restaurant.id}"
                                    class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
- --%>
+ &ndash;%&gt;
                             <td><a class="btn btn-xs btn-primary"  onclick="updateRow(${restaurant.id})"><fmt:message key="common.update"/></a></td>
-<%--
+&lt;%&ndash;
                             <td><a href="restaurants/delete?id=${restaurant.id}"
                                    class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
---%>
+&ndash;%&gt;
                             <td><a class="btn btn-xs btn-danger" onclick="deleteRow(${restaurant.id})"><fmt:message key="common.delete"/></a></td>
 
-                                <%--
+                                &lt;%&ndash;
                                                 <td><a href="dishes?restaurantId=${restaurant.id}"><fmt:message key="restaurants.dishes"/></a></td>
                                                 <td><a href="restaurants/update?id=${restaurant.id}"><fmt:message key="common.update"/></a></td>
                                                 <td><a href="restaurants/delete?id=${restaurant.id}"><fmt:message key="common.delete"/></a></td>
-                                --%>
+                                &ndash;%&gt;
                         </tr>
                     </c:forEach>
+--%>
                 </table>
             </div>
         </div>
@@ -84,7 +86,7 @@
                         <label for="name" class="control-label col-xs-3"><fmt:message key="restaurants.name"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder=<fmt:message key="restaurants.name"/>>
+                            <input type="text" autofocus class="form-control" id="name" name="name" placeholder=<fmt:message key="restaurants.name"/>>
                         </div>
                     </div>
 
@@ -105,8 +107,9 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<%--<script type="text/javascript" src="resources/js/restaurantDatatable.js"></script>--%>
+<script type="text/javascript" src="resources/js/restaurantDatatable.js"></script>
 
+<%--
 <script type="text/javascript">
 
     var ajaxUrl = 'ajax/restaurants/';
@@ -148,5 +151,6 @@
         makeEditable();
     });
 </script>
+--%>
 
 </html>

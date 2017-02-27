@@ -17,13 +17,13 @@
             <h3><fmt:message key="dishes.title"/></h3>
 
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="addDish(${restaurantId})"><fmt:message
+                <a class="btn btn-sm btn-info" onclick="addDish()"><fmt:message
                         key="dishes.add"/></a>
                 <%--
                     <hr>
                     <table class="tg">
                 --%>
-                <table class="table table-striped">
+                <table class="table table-striped" id="datatable">
                     <thead>
                     <tr>
                         <th><fmt:message key="dishes.date"/></th>
@@ -33,29 +33,23 @@
                         <th></th>
                     </tr>
                     </thead>
+<%--
                     <c:forEach items="${dishList}" var="dish">
                         <jsp:useBean id="dish" scope="page" type="ru.seleand.restaurants.model.Dish"/>
-                        <%--<tr class='normal'>--%>
+                        &lt;%&ndash;<tr class='normal'>&ndash;%&gt;
                         <tr>
                             <td>
                                     ${dish.date}
-                                    <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
-                                    <%--${fn:formatDateTime(meal.dateTime)}--%>
+                                    &lt;%&ndash;<%=TimeUtil.toString(meal.getDateTime())%>&ndash;%&gt;
+                                    &lt;%&ndash;${fn:formatDateTime(meal.dateTime)}&ndash;%&gt;
                             </td>
                             <td>${dish.description}</td>
                             <td><fmt:formatNumber type="number" minFractionDigits="2" value="${dish.price/100}"/></td>
-<%--
-                            <td><a href="dishes/update?id=${dish.id}&restaurantId=${restaurantId}"
-                                   class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
---%>
                             <td><a class="btn btn-xs btn-primary" onclick="updateDishRow(${restaurantId},${dish.id})"><fmt:message key="common.update"/></a></td>
-<%--
-                            <td><a href="dishes/delete?id=${dish.id}&restaurantId=${restaurantId}"
-                                   class="btn btn-xs btn-danger"><fmt:message key="common.delete"/></a></td>
---%>
                             <td><a class="btn btn-xs btn-danger" onclick="deleteDishRow(${restaurantId},${dish.id})"><fmt:message key="common.delete"/></a></td>
                         </tr>
                     </c:forEach>
+--%>
                 </table>
                 <a href="restaurants" class="btn btn-sm btn-info"><fmt:message key="restaurants.title"/></a>
                 <%--</section>--%>
@@ -107,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="save(${restaurantId})"><fmt:message key="common.save"/></button>
+                            <button class="btn btn-primary" type="button" onclick="saveDish()"><fmt:message key="common.save"/></button>
                         </div>
                     </div>
                 </form>
@@ -122,8 +116,15 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-<%--<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>--%>
+<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/js/dishDatatable.js"></script>
+<script type="text/javascript">
+    var ajaxUrl = 'ajax/dishes/'+"${restaurantId}";
+    var rId = "${restaurantId}";
+    var ajaxUrlPost = 'ajax/dishes/';
+</script>
+
+<%--
 <script type="text/javascript">
     var ajaxUrl = 'ajax/dishes/';
     var datatableApi;
@@ -177,4 +178,5 @@
         makeEditable();
     });
 </script>
+--%>
 </html>
