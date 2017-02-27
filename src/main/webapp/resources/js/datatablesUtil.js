@@ -7,12 +7,14 @@ function makeEditable() {
     });
 }
 
-function add() {
+function add(add_title) {
+    $('#modalTitle').html(add_title);
     form.find(":input").val("");
     $('#editRow').modal();
 }
 
 function updateRow(id) {
+    $('#modalTitle').html(edit_title);
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
@@ -27,7 +29,7 @@ function deleteRow(id) {
         type: 'DELETE',
         success: function () {
             updateTable();
-            successNoty('Deleted');
+            successNoty('common.deleted');
         }
     });
 }
@@ -48,7 +50,7 @@ function save() {
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
-            successNoty('Saved');
+            successNoty('common.saved');
         }
     });
 }
@@ -62,10 +64,10 @@ function closeNoty() {
     }
 }
 
-function successNoty(text) {
+function successNoty(key) {
     closeNoty();
     noty({
-        text: text,
+        text: i18n[key],
         type: 'success',
         layout: 'bottomRight',
         timeout: true
@@ -75,7 +77,7 @@ function successNoty(text) {
 function failNoty(event, jqXHR, options, jsExc) {
     closeNoty();
     failedNote = noty({
-        text: 'Failed: ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
+        text: i18n['common.failed'] + ': ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
         type: 'error',
         layout: 'bottomRight'
     });
@@ -83,13 +85,13 @@ function failNoty(event, jqXHR, options, jsExc) {
 
 function renderEditBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ');">Edit</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ');">'+i18n['common.update']+'</a>';
     }
 }
 
 function renderDeleteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">Delete</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">'+i18n['common.delete']+'</a>';
     }
 }
 

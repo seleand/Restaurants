@@ -2,7 +2,8 @@
  * Created by Asus on 24.02.2017.
  */
 
-function addDish() {
+function addDish(add_title) {
+    $('#modalTitle').html(add_title);
     form.find(":input").val("");
     form.find("input[id='restaurantId']").val(rId);
     // form.find("#id").val("");
@@ -10,6 +11,7 @@ function addDish() {
 }
 
 function updateDishRow(id) {
+    $('#modalTitle').html(edit_title);
     $.get(ajaxUrl + '/dish/' + id, function (data) {
         $.each(data, function (key, value){
         if (key == 'price') {
@@ -32,7 +34,7 @@ function deleteDishRow(id) {
         success: function () {
             // updateTable(restaurantId);
             updateTable();
-            successNoty('Deleted');
+            successNoty('common.deleted');
         }
     });
 }
@@ -45,7 +47,7 @@ function saveDish() {
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
-            successNoty('Saved');
+            successNoty('common.saved');
         }
     });
 }
@@ -99,12 +101,12 @@ $(function () {
 
 function renderDishEditBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" onclick="updateDishRow(' + row.id + ');">Edit</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="updateDishRow(' + row.id + ');">'+i18n['common.update']+'</a>';
     }
 }
 
 function renderDishDeleteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-danger" onclick="deleteDishRow(' + row.id + ');">Delete</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="deleteDishRow(' + row.id + ');">'+i18n['common.delete']+'</a>';
     }
 }

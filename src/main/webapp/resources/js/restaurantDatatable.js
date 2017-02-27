@@ -52,7 +52,7 @@ $(function () {
 
 function renderDishesBtn(data, type, row) {
     if (type == 'display') {
-        return '<a href="dishes?restaurantId=' + row.id + '" class="btn btn-xs btn-primary">Dishes</a>';
+        return '<a href="dishes?restaurantId=' + row.id + '" class="btn btn-xs btn-primary">'+i18n['restaurants.dishes']+'</a>';
     }
 }
 
