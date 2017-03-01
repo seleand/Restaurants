@@ -6,10 +6,6 @@ import ru.seleand.restaurants.repository.UserRepository;
 
 import java.util.Arrays;
 
-/**
- * User: gkislin
- * Date: 22.08.2014
- */
 public class SpringMain {
     public static void main(String[] args) {
         ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml", "spring/spring-mvc.xml");

@@ -22,6 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.seleand.restaurants.RestaurantTestData.RESTAURANT_1;
 import static ru.seleand.restaurants.RestaurantTestData.RESTAURANT_ID;
 import static ru.seleand.restaurants.DishTestData.*;
+import static ru.seleand.restaurants.TestUtil.userHttpBasic;
+import static ru.seleand.restaurants.UserTestData.ADMIN;
+import static ru.seleand.restaurants.UserTestData.USER;
 
 /**
  * Created by Asus on 14.02.2017.
@@ -35,7 +38,8 @@ public class DishRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL+RESTAURANT_ID))
+        TestUtil.print(mockMvc.perform(get(REST_URL+RESTAURANT_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(DISH_1, DISH_2, DISH_3)));
@@ -43,8 +47,23 @@ public class DishRestControllerTest extends AbstractControllerTest{
     }
 
     @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL+RESTAURANT_ID))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL+RESTAURANT_ID)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isForbidden());
+    }
+
+
+    @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL+RESTAURANT_ID+"/dish/"+DISH_ID))
+        mockMvc.perform(get(REST_URL+RESTAURANT_ID+"/dish/"+DISH_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -56,6 +75,7 @@ public class DishRestControllerTest extends AbstractControllerTest{
     public void testCreate() throws Exception {
         Dish expected = new Dish(LocalDate.now(), "New", 5000, RESTAURANT_1);
         ResultActions action = mockMvc.perform(post(REST_URL)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
 
@@ -69,7 +89,8 @@ public class DishRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL+RESTAURANT_ID+"/dish/"+DISH_ID))
+        mockMvc.perform(delete(REST_URL+RESTAURANT_ID+"/dish/"+DISH_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Arrays.asList(DISH_2, DISH_3), dishService.getAll(RESTAURANT_ID));
@@ -81,6 +102,7 @@ public class DishRestControllerTest extends AbstractControllerTest{
         Dish updated = new Dish(DISH_ID, LocalDate.of(2016,11,13),"dish 1 rest1",5000);
         updated.setDescription("UpdatedDescription");
         mockMvc.perform(put(REST_URL+RESTAURANT_ID+"/dish/"+DISH_ID)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());

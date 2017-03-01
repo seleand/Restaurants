@@ -20,6 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.seleand.restaurants.RestaurantTestData.*;
+import static ru.seleand.restaurants.TestUtil.userHttpBasic;
+import static ru.seleand.restaurants.UserTestData.ADMIN;
+import static ru.seleand.restaurants.UserTestData.USER;
 
 /**
  * Created by Asus on 13.02.2017.
@@ -33,7 +36,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL))
+        TestUtil.print(mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(RESTAURANT_1, RESTAURANT_2)));
@@ -42,7 +46,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL+RESTAURANT_ID))
+        mockMvc.perform(get(REST_URL+RESTAURANT_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -54,6 +59,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
     public void testCreate() throws Exception {
         Restaurant expected = new Restaurant(null, "New");
         ResultActions action = mockMvc.perform(post(REST_URL)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
 
@@ -67,7 +73,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + RESTAURANT_ID))
+        mockMvc.perform(delete(REST_URL + RESTAURANT_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Collections.singletonList(RESTAURANT_2), restaurantService.getAll());
@@ -79,6 +86,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
         Restaurant updated = new Restaurant(RESTAURANT_ID,RESTAURANT_1.getName());
         updated.setName("UpdatedName");
         mockMvc.perform(put(REST_URL + RESTAURANT_ID)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
@@ -86,5 +94,19 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
         MATCHER.assertEquals(updated, restaurantService.get(RESTAURANT_ID));
 
     }
+
+    @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isForbidden());
+    }
+
 
 }
