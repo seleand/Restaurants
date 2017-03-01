@@ -3,10 +3,10 @@ package ru.seleand.restaurants.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.seleand.restaurants.service.DishService;
-import ru.seleand.restaurants.service.RestaurantService;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.service.UserService;
 
@@ -30,7 +30,7 @@ public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        return "index";
+        return "redirect:restaurants";
     }
 
     @RequestMapping(value = "/dishes", method = RequestMethod.GET)
@@ -41,6 +41,14 @@ public class RootController {
         return "dishList";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(ModelMap model,
+                        @RequestParam(value = "error", required = false) boolean error,
+                        @RequestParam(value = "message", required = false) String message) {
+        model.put("error", error);
+        model.put("message", message);
+        return "login";
+    }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String users(Model model) {

@@ -5,7 +5,7 @@
 <%--<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>--%>
 
 <html>
-<jsp:include page="fragments/headTag1.jsp"/>
+<jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css">
 
 <body>

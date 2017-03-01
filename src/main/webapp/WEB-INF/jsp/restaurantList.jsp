@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="resources/css/style1.css">
 </head>
 --%>
-<jsp:include page="fragments/headTag1.jsp"/>
+<jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css">
 
 <body>
@@ -20,7 +20,6 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <%--<h2><a href="index.jsp"><fmt:message key="app.home"/></a></h2>--%>
             <h3><fmt:message key="restaurants.title"/></h3>
 
             <div class="view-box">
