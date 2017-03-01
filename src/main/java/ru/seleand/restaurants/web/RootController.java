@@ -56,12 +56,14 @@ public class RootController {
         return "users";
     }
 
+/*
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public String setUser(HttpServletRequest request) {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         return "redirect:restaurants";
     }
+*/
 
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {

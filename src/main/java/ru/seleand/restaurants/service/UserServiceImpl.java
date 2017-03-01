@@ -3,9 +3,13 @@ package ru.seleand.restaurants.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.repository.UserRepository;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
@@ -16,8 +20,8 @@ import java.util.List;
 /**
  * Created by Asus on 02.11.2016.
  */
-@Service
-public class UserServiceImpl implements UserService{
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepository repository;
     @Override
@@ -70,4 +74,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public void evictCache() {
     }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User u = repository.getByEmail(email);
+        if (u == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(u);
+    }
+
 }

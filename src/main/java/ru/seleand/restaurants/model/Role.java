@@ -1,10 +1,13 @@
 package ru.seleand.restaurants.model;
 
-/**
- * User: gkislin
- * Date: 22.08.2014
- */
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
     ROLE_USER,
-    ROLE_ADMIN
+    ROLE_ADMIN;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
