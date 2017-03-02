@@ -1,7 +1,7 @@
 /**
  * Created by Asus on 24.02.2017.
  */
-var ajaxUrl = 'ajax/restaurants/';
+var ajaxUrl = 'ajax/admin/restaurants/';
 var datatableApi;
 
 /*

@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping(DishRestController.REST_URL)
 public class DishRestController extends AbstractDishController{
-    static final String REST_URL = "/rest/dishes";
+    static final String REST_URL = "/rest/admin/dishes";
 
     @GetMapping(value = "/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll(@PathVariable("restaurantId") int restaurantId) {
