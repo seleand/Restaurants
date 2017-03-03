@@ -1,3 +1,4 @@
+DELETE FROM votes;
 DELETE FROM user_roles;
 DELETE FROM users;
 DELETE FROM dishes;
@@ -29,3 +30,11 @@ VALUES
   ('dish 1 rest2', 7000,  '2016-11-13', 100003),
   ('dish 2 rest2', 5700, '2016-11-13',  100003),
   ('dish 3 rest3', 6000,  '2016-11-12', 100003);
+
+INSERT INTO votes (date_time, user_id, restaurant_id)
+VALUES
+  ('2016-11-13 09:00:00', 100000, 100002),
+  ('2016-11-13 10:00:00', 100001, 100003),
+  ('2016-11-12 09:00:00', 100000, 100002),
+  ('2016-11-11 10:00:00', 100000, 100002),
+  ('2016-11-12 10:00:00', 100001, 100003);

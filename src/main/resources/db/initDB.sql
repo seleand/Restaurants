@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS dishes;
@@ -41,3 +42,12 @@ CREATE TABLE dishes
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
+CREATE TABLE votes
+(
+  id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  date_time TIMESTAMP DEFAULT NOW(),
+  user_id INTEGER NOT NULL,
+  restaurant_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
+);
