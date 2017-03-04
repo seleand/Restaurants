@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.seleand.restaurants.model.Dish;
 import ru.seleand.restaurants.repository.DishRepository;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcDishRepositoryImpl implements DishRepository {
 
     private static final BeanPropertyRowMapper<Dish> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Dish.class);
@@ -39,6 +41,7 @@ public class JdbcDishRepositoryImpl implements DishRepository {
     }
 
     @Override
+    @Transactional
     public Dish save(Dish dish, int restaurantId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", dish.getId())
@@ -61,6 +64,7 @@ public class JdbcDishRepositoryImpl implements DishRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int restaurantId) {
         return jdbcTemplate.update("DELETE FROM dishes WHERE id=? AND restaurant_id=?", id, restaurantId) != 0;
     }
