@@ -8,9 +8,28 @@ import java.time.LocalTime;
 /**
  * Created by Asus on 02.03.2017.
  */
+
+@NamedQueries({
+        @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId"),
+        @NamedQuery(name = Vote.GET, query = "SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId"),
+        @NamedQuery(name = Vote.USER_VOTES, query = "SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.dateTime desc"),
+        @NamedQuery(name = Vote.USER_VOTES_BETWEEN, query = "SELECT v FROM Vote v " +
+                "WHERE v.user.id=:userId AND v.dateTime BETWEEN :startDate AND :endDate ORDER BY v.dateTime DESC"),
+        @NamedQuery(name = Vote.GET_ALL, query = "SELECT v FROM Vote v ORDER BY v.dateTime desc"),
+        @NamedQuery(name = Vote.VOTES_BETWEEN, query = "SELECT v FROM Vote v " +
+                "WHERE v.dateTime BETWEEN :startDate AND :endDate ORDER BY v.dateTime DESC")
+})
+
 @Entity
 @Table(name = "votes")
 public class Vote extends BaseEntity {
+
+    public static final String DELETE = "Vote.delete";
+    public static final String GET = "Vote.get";
+    public static final String USER_VOTES = "Vote.getUserVotes";
+    public static final String USER_VOTES_BETWEEN = "Vote.getUserVotesBetween";
+    public static final String GET_ALL = "Vote.getAllVotes";
+    public static final String VOTES_BETWEEN = "Vote.getVotesBetween";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
