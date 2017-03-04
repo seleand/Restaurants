@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -56,8 +57,8 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish getWithRestaurant(int id, int userId) {
-        return ExceptionUtil.checkNotFoundWithId(repository.getWithRestaurant(id, userId), id);
+    public Dish getWithRestaurant(int id, int restaurantId) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getWithRestaurant(id, restaurantId), id);
     }
 
 }
