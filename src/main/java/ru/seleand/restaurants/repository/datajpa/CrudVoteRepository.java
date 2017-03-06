@@ -37,5 +37,6 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.dateTime BETWEEN :startDateTime AND :endDateTime ORDER BY v.dateTime desc")
     List<Vote> findUserVotesBetween(@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime, @Param("userId") int userId);
 
+    @Query("SELECT v FROM Vote v WHERE v.dateTime BETWEEN :startDateTime AND :endDateTime ORDER BY v.dateTime desc")
     List<Vote> findVotesBetween(@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime);
 }
