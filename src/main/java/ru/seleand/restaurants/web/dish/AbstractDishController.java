@@ -9,7 +9,7 @@ import ru.seleand.restaurants.to.DishTo;
 
 import java.util.List;
 
-public class AbstractDishController {
+public abstract class AbstractDishController {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDishController.class);
 
     @Autowired
