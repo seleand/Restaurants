@@ -126,9 +126,9 @@
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/js/dishDatatable.js"></script>
 <script type="text/javascript">
-    var ajaxUrl = 'ajax/admin/dishes/'+"${restaurantId}";
+    var ajaxUrl = 'ajax/dishes/'+"${restaurantId}";
     var rId = "${restaurantId}";
-    var ajaxUrlPost = 'ajax/admin/dishes/';
+    var ajaxUrlPost = 'ajax/dishes/';
 </script>
 
 <%--

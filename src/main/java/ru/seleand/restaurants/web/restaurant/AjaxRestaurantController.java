@@ -4,6 +4,7 @@ package ru.seleand.restaurants.web.restaurant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(AjaxRestaurantController.REST_URL)
 public class AjaxRestaurantController extends AbstractRestaurantController{
-    static final String REST_URL = "/ajax/admin/restaurants";
+    static final String REST_URL = "/ajax/restaurants";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
@@ -24,6 +25,7 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> createOrUpdate(@Valid Restaurant restaurant, BindingResult result) {
         if (result.hasErrors()) {
             StringBuilder sb = new StringBuilder();
@@ -61,6 +63,7 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
 */
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }

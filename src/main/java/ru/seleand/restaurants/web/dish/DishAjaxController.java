@@ -4,6 +4,7 @@ package ru.seleand.restaurants.web.dish;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.seleand.restaurants.model.Dish;
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(DishAjaxController.REST_URL)
 public class DishAjaxController extends AbstractDishController{
-    static final String REST_URL = "/ajax/admin/dishes";
+    static final String REST_URL = "/ajax/dishes";
 
     @GetMapping(value = "/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll(@PathVariable("restaurantId") int restaurantId) {
@@ -30,11 +31,13 @@ public class DishAjaxController extends AbstractDishController{
     }
 
     @DeleteMapping(value = "/{restaurantId}/dish/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
         super.delete(id, restaurantId);
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> createOrUpdate(@Valid DishTo dishTo, BindingResult result) {
         if (result.hasErrors()) {
             StringBuilder sb = new StringBuilder();
