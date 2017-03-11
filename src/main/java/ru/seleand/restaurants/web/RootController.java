@@ -1,6 +1,8 @@
 package ru.seleand.restaurants.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.seleand.restaurants.AuthorizedUser;
+import ru.seleand.restaurants.model.Role;
+import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,8 +71,16 @@ public class RootController {
 
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {
-//        model.addAttribute("restaurantList", restaurantService.getAll());
-        return "restaurantList";
+/*
+        AuthorizedUser authorizedUser = AuthorizedUser.get();
+        if (authorizedUser!=null) {
+            if (authorizedUser.roles)
+        }
+*/
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
+            return "restaurantList";
+        }
+        return "userRestaurantList";
     }
     private int getParameterInt(HttpServletRequest request, String parameterName) {
         String param = Objects.requireNonNull(request.getParameter(parameterName));

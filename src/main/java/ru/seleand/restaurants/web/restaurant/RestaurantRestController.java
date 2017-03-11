@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.seleand.restaurants.model.Restaurant;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 
 import java.net.URI;
 import java.util.List;
@@ -18,7 +19,7 @@ public class RestaurantRestController extends AbstractRestaurantController{
     static final String REST_URL = "/rest/admin/restaurants";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAll() {
+    public List<RestaurantWithVotes> getAll() {
         return super.getAll();
     }
 

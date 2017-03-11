@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.service;
 
 import ru.seleand.restaurants.model.Restaurant;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface RestaurantService {
 
     void update(Restaurant restaurant);
 
+    List<RestaurantWithVotes> findAllWithVotes(Integer userId);
 
     Restaurant getWithDishes(int id);
 

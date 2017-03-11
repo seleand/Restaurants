@@ -4,8 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.service.RestaurantService;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 
 import java.util.List;
 
@@ -31,9 +33,10 @@ public abstract class AbstractRestaurantController {
         return service.get(id);
     }
 
-    public List<Restaurant> getAll() {
+    public List<RestaurantWithVotes> getAll() {
+        int userId = AuthorizedUser.id();
         LOG.info("Get all restaurants");
-        return service.getAll();
+        return service.findAllWithVotes(userId);
     }
 
     public void update(Restaurant restaurant, int id) {

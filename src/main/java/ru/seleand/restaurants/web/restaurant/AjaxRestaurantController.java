@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.seleand.restaurants.model.Restaurant;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -20,7 +21,7 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
     static final String REST_URL = "/ajax/restaurants";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAll() {
+    public List<RestaurantWithVotes> getAll() {
         return super.getAll();
     }
 

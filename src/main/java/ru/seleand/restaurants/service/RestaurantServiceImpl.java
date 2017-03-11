@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.repository.RestaurantRepository;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
@@ -42,6 +43,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must be not null");
         repository.save(restaurant);
+    }
+
+    @Override
+    public List<RestaurantWithVotes> findAllWithVotes(Integer userId) {
+        return repository.findAllWithVotes(userId);
     }
 
     @Override

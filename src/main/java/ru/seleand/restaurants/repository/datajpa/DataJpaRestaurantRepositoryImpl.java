@@ -5,12 +5,21 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.repository.RestaurantRepository;
+import ru.seleand.restaurants.to.RestaurantWithVotes;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 @Repository
 public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
     private static final Sort SORT_NAME = new Sort("name");
+
+/*
+    @PersistenceContext
+    private EntityManager em;
+*/
 
     @Autowired
     private CrudRestaurantRepository crudRepository;
@@ -41,4 +50,9 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
         return crudRepository.getWithDishes(id);
     }
 
+    public List<RestaurantWithVotes> findAllWithVotes(Integer userId){
+        LocalDateTime startDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0));
+        LocalDateTime endDateTime = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0,0));
+        return crudRepository.findAllWithVotes(userId, startDateTime, endDateTime);
+    }
 }
