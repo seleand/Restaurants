@@ -7,17 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.to.RestaurantWithVotes;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(AjaxRestaurantController.REST_URL)
-public class AjaxRestaurantController extends AbstractRestaurantController{
+@RequestMapping(RestaurantAjaxController.REST_URL)
+public class RestaurantAjaxController extends AbstractRestaurantController{
     static final String REST_URL = "/ajax/restaurants";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

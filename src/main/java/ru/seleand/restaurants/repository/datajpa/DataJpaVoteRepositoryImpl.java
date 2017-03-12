@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.seleand.restaurants.model.Vote;
 import ru.seleand.restaurants.repository.VoteRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -47,8 +47,8 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> getUserVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        return crudVoteRepository.findUserVotesBetween(startDateTime, endDateTime, userId);
+    public List<Vote> getUserVotesBetween(LocalDate startDate, LocalDate endDate, int userId) {
+        return crudVoteRepository.findUserVotesBetween(startDate, endDate, userId);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> getVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return crudVoteRepository.findVotesBetween(startDateTime, endDateTime);
+    public List<Vote> getVotesBetween(LocalDate startDate, LocalDate endDate) {
+        return crudVoteRepository.findVotesBetween(startDate, endDate);
     }
 }

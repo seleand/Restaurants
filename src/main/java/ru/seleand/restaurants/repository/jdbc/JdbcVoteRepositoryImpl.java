@@ -13,7 +13,7 @@ import ru.seleand.restaurants.model.Vote;
 import ru.seleand.restaurants.repository.VoteRepository;
 
 import javax.sql.DataSource;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -45,7 +45,7 @@ public class JdbcVoteRepositoryImpl implements VoteRepository {
     public Vote save(Vote vote, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", vote.getId())
-                .addValue("date_time",vote.getDateTime())
+                .addValue("date",vote.getDate())
                 .addValue("user_id",userId)
                 .addValue("restaurant_id",vote.getRestaurant().getId());
 
@@ -54,7 +54,7 @@ public class JdbcVoteRepositoryImpl implements VoteRepository {
             vote.setId(newKey.intValue());
         } else {
             if (namedParameterJdbcTemplate.update(
-                    "UPDATE votes SET date_time=:date_time, restaurant_id=:restaurant_id " +
+                    "UPDATE votes SET date=:date, restaurant_id=:restaurant_id " +
                             "WHERE id=:id AND user_id=:user_id", map)==0) {
                 return null;
             }
@@ -76,25 +76,25 @@ public class JdbcVoteRepositoryImpl implements VoteRepository {
 
     @Override
     public List<Vote> getUserVotes(int userId) {
-        return jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? ORDER BY date_time DESC", ROW_MAPPER, userId);
+        return jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? ORDER BY date DESC", ROW_MAPPER, userId);
     }
 
     @Override
-    public List<Vote> getUserVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        return jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? AND date_time BETWEEN ? AND ? ORDER BY date_time DESC",
+    public List<Vote> getUserVotesBetween(LocalDate startDate, LocalDate endDate, int userId) {
+        return jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? AND date BETWEEN ? AND ? ORDER BY date DESC",
 //                ROW_MAPPER, userId, toDbDateTime(startDateTime), toDbDateTime(endDateTime));
-                ROW_MAPPER, userId, startDateTime, endDateTime);
+                ROW_MAPPER, userId, startDate, endDate);
     }
 
     @Override
     public List<Vote> getAll() {
-        return jdbcTemplate.query("SELECT * FROM votes ORDER BY date_time DESC", ROW_MAPPER);
+        return jdbcTemplate.query("SELECT * FROM votes ORDER BY date DESC", ROW_MAPPER);
     }
 
     @Override
-    public List<Vote> getVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return jdbcTemplate.query("SELECT * FROM votes WHERE date_time BETWEEN ? AND ? ORDER BY date_time DESC",
+    public List<Vote> getVotesBetween(LocalDate startDate, LocalDate endDate) {
+        return jdbcTemplate.query("SELECT * FROM votes WHERE date BETWEEN ? AND ? ORDER BY date DESC",
 //                ROW_MAPPER, userId, toDbDateTime(startDateTime), toDbDateTime(endDateTime));
-                ROW_MAPPER, startDateTime, endDateTime);
+                ROW_MAPPER, startDate, endDate);
     }
 }

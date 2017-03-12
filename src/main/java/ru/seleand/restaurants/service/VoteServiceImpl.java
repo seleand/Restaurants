@@ -8,7 +8,7 @@ import ru.seleand.restaurants.repository.VoteRepository;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -47,10 +47,10 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> getUserVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        Assert.notNull(startDateTime, "startDateTime must be not null");
-        Assert.notNull(endDateTime, "endDateTime must be not null");
-        return repository.getUserVotesBetween(startDateTime, endDateTime, userId);
+    public List<Vote> getUserVotesBetween(LocalDate startDate, LocalDate endDate, int userId) {
+        Assert.notNull(startDate, "startDate must be not null");
+        Assert.notNull(endDate, "endDate must be not null");
+        return repository.getUserVotesBetween(startDate, endDate, userId);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> getVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        Assert.notNull(startDateTime, "startDateTime must be not null");
-        Assert.notNull(endDateTime, "endDateTime must be not null");
-        return repository.getVotesBetween(startDateTime, endDateTime);
+    public List<Vote> getVotesBetween(LocalDate startDate, LocalDate endDate) {
+        Assert.notNull(startDate, "startDate must be not null");
+        Assert.notNull(endDate, "endDate must be not null");
+        return repository.getVotesBetween(startDate, endDate);
     }
 }

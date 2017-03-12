@@ -9,7 +9,7 @@ import ru.seleand.restaurants.repository.VoteRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -59,11 +59,11 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> getUserVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
+    public List<Vote> getUserVotesBetween(LocalDate startDate, LocalDate endDate, int userId) {
         return em.createNamedQuery(Vote.USER_VOTES_BETWEEN, Vote.class)
                 .setParameter("userId", userId)
-                .setParameter("startDate", startDateTime)
-                .setParameter("endDate", endDateTime).getResultList();
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate).getResultList();
     }
 
     @Override
@@ -72,9 +72,9 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> getVotesBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public List<Vote> getVotesBetween(LocalDate startDate, LocalDate endDate) {
         return em.createNamedQuery(Vote.VOTES_BETWEEN, Vote.class)
-                .setParameter("startDate", startDateTime)
-                .setParameter("endDate", endDateTime).getResultList();
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate).getResultList();
     }
 }

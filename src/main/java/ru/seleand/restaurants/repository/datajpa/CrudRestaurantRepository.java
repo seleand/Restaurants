@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.to.RestaurantWithVotes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Query("SELECT new ru.seleand.restaurants.to.RestaurantWithVotes(r.name, r.id, COUNT(v1), " +
             "CASE COUNT(v2) WHEN 0 THEN false ELSE true END) " +
             "FROM Restaurant r LEFT JOIN FETCH Vote v1 ON r.id=v1.restaurant.id " +
-            "LEFT JOIN FETCH Vote v2 ON (r.id=v2.restaurant.id AND v2.user.id=?1 AND v2.dateTime BETWEEN ?2 AND ?3) " +
+            "LEFT JOIN FETCH Vote v2 ON (r.id=v2.restaurant.id AND v2.user.id=?1 AND v2.date=?2) " +
             "GROUP BY r.name, r.id")
-    List<RestaurantWithVotes> findAllWithVotes(Integer userId, LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<RestaurantWithVotes> findAllWithVotes(Integer userId, LocalDate date);
 }

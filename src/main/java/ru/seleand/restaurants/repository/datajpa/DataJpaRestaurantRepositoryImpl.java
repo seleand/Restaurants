@@ -51,8 +51,8 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     public List<RestaurantWithVotes> findAllWithVotes(Integer userId){
-        LocalDateTime startDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0));
-        LocalDateTime endDateTime = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0,0));
-        return crudRepository.findAllWithVotes(userId, startDateTime, endDateTime);
+        LocalDate today = LocalDate.now();
+//        LocalDateTime endDateTime = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0,0));
+        return crudRepository.findAllWithVotes(userId, today);
     }
 }

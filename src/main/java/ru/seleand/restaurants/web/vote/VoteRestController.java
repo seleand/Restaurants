@@ -55,12 +55,10 @@ public class VoteRestController {
         return service.save(vote, userId);
     }
 
-/*
     public List<Vote> getByUserBetween(LocalDate startDate, LocalDate endDate) {
         int userId = AuthorizedUser.id();
         LOG.info("getBetween dates {} - {} for User {}", startDate, endDate, userId);
         return service.getUserVotesBetween(startDate, endDate, userId);
     }
-*/
 
 }

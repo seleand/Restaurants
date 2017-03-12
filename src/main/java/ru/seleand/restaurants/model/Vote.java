@@ -12,12 +12,12 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId"),
         @NamedQuery(name = Vote.GET, query = "SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId"),
-        @NamedQuery(name = Vote.USER_VOTES, query = "SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.dateTime desc"),
+        @NamedQuery(name = Vote.USER_VOTES, query = "SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.date desc"),
         @NamedQuery(name = Vote.USER_VOTES_BETWEEN, query = "SELECT v FROM Vote v " +
-                "WHERE v.user.id=:userId AND v.dateTime BETWEEN :startDate AND :endDate ORDER BY v.dateTime DESC"),
-        @NamedQuery(name = Vote.GET_ALL, query = "SELECT v FROM Vote v ORDER BY v.dateTime desc"),
+                "WHERE v.user.id=:userId AND v.date BETWEEN :startDate AND :endDate ORDER BY v.date DESC"),
+        @NamedQuery(name = Vote.GET_ALL, query = "SELECT v FROM Vote v ORDER BY v.date desc"),
         @NamedQuery(name = Vote.VOTES_BETWEEN, query = "SELECT v FROM Vote v " +
-                "WHERE v.dateTime BETWEEN :startDate AND :endDate ORDER BY v.dateTime DESC")
+                "WHERE v.date BETWEEN :startDate AND :endDate ORDER BY v.date DESC")
 })
 
 @Entity
@@ -35,8 +35,8 @@ public class Vote extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date_time", nullable = false)
-    private LocalDateTime dateTime;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -45,16 +45,16 @@ public class Vote extends BaseEntity {
     public Vote() {
     }
 
-    public Vote(User user, LocalDateTime dateTime, Restaurant restaurant) {
+    public Vote(User user, LocalDate date, Restaurant restaurant) {
         this.user = user;
-        this.dateTime = dateTime;
+        this.date = date;
         this.restaurant = restaurant;
     }
 
-    public Vote(Integer id, User user, LocalDateTime dateTime, Restaurant restaurant) {
+    public Vote(Integer id, User user, LocalDate date, Restaurant restaurant) {
         super(id);
         this.user = user;
-        this.dateTime = dateTime;
+        this.date = date;
         this.restaurant = restaurant;
     }
 
@@ -74,19 +74,19 @@ public class Vote extends BaseEntity {
         this.user = user;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Vote{" +
                 "user=" + user +
-                ", dateTime=" + dateTime +
+                ", date=" + date +
                 ", restaurant=" + restaurant +
                 '}';
     }

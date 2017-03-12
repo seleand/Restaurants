@@ -45,7 +45,7 @@ CREATE TABLE dishes
 CREATE TABLE votes
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  date_time TIMESTAMP DEFAULT NOW(),
+  date DATE NOT NULL DEFAULT NOW(),
   user_id INTEGER NOT NULL,
   restaurant_id INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
