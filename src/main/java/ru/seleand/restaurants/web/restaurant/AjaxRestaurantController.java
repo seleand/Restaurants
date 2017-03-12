@@ -44,25 +44,6 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-/*
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant get(@PathVariable("id") int id) {
-        return super.get(id);
-    }
-
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
-        Restaurant created = super.create(restaurant);
-
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
-
-        return ResponseEntity.created(uriOfNewResource).body(created);
-    }
-*/
-
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(@PathVariable("id") int id) {
@@ -73,12 +54,5 @@ public class AjaxRestaurantController extends AbstractRestaurantController{
     public Restaurant get(@PathVariable("id") int id) {
         return super.get(id);
     }
-
-/*
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Restaurant restaurant, @PathVariable("id") int id) {
-        super.update(restaurant, id);
-    }
-*/
 
 }

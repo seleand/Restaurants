@@ -34,9 +34,11 @@
                     <thead>
                     <tr>
                         <th><fmt:message key="restaurants.description"/></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th><fmt:message key="restaurants.votes"/></th>
+                        <th></th>   <%--button dishes--%>
+                        <th></th>   <%--button vote--%>
+                        <th></th>   <%--button edit--%>
+                        <th></th>   <%--button delete--%>
                     </tr>
                     </thead>
 <%--
@@ -102,7 +104,8 @@
 </body>
 <script type="text/javascript">
     var i18n = [];
-    <c:forEach var='key' items='<%=new String[]{"common.update","common.delete","common.deleted","common.saved","common.enabled","common.disabled","common.failed","restaurants.dishes"}%>'>
+    <c:forEach var='key' items='<%=new String[]{"common.update","common.delete","common.deleted","common.saved","common.enabled",
+    "common.disabled","common.failed","restaurants.dishes","restaurants.vote","restaurants.voted"}%>'>
     i18n['${key}'] = '<fmt:message key="${key}"/>';
     </c:forEach>
     var edit_title ='<fmt:message key="restaurants.edit"/>';

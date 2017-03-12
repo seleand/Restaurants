@@ -1,7 +1,6 @@
 package ru.seleand.restaurants.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.Role;
-import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +75,7 @@ public class RootController {
         }
 */
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
-            return "restaurantList";
+            return "adminRestaurantList";
         }
         return "userRestaurantList";
     }

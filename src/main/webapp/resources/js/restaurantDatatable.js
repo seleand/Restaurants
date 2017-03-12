@@ -24,9 +24,17 @@ $(function () {
                 "data": "name"
             },
             {
+                "data": "votesQuantity"
+            },
+            {
                 "defaultContent": "",
                 "render": renderDishesBtn,
                 "orderable": false
+            },
+            {
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderVoteBtn
             },
             {
                 "orderable": false,
@@ -41,10 +49,15 @@ $(function () {
         ],
         "order": [
             [
-                0,
-                "asc"
+                1,
+                "desc"
             ]
         ],
+        "createdRow": function (row, data, dataIndex) {
+            if (data.userVotedThisRestaurantToday) {
+                $(row).css("font-weight", "bold").css("color", "green");
+            }
+        },
         "initComplete": makeEditable
     });
     // makeEditable();
@@ -56,3 +69,8 @@ function renderDishesBtn(data, type, row) {
     }
 }
 
+function renderVoteBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a href="dishes?restaurantId=' + row.id + '" class="btn btn-xs btn-primary">' + i18n[+row.userVotedThisRestaurantToday ? 'restaurants.voted' : 'restaurants.vote'] + '</a>';
+    }
+}

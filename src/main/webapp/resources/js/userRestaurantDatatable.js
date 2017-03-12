@@ -41,7 +41,7 @@ $(function () {
                 "orderable": false,
                 "defaultContent": "",
                 "render": renderVoteBtn
-            },
+            }
         ],
         "order": [
             [
