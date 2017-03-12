@@ -39,7 +39,10 @@ public class RootController {
         int restaurantId = getParameterInt(request,"restaurantId");
 //        model.addAttribute("dishList", dishService.getAll(restaurantId));
         model.addAttribute("restaurantId",restaurantId);
-        return "dishList";
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
+            return "adminDishList";
+        }
+        return "userDishList";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -68,12 +71,6 @@ public class RootController {
 
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {
-/*
-        AuthorizedUser authorizedUser = AuthorizedUser.get();
-        if (authorizedUser!=null) {
-            if (authorizedUser.roles)
-        }
-*/
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
             return "adminRestaurantList";
         }
