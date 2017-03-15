@@ -5,17 +5,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import ru.seleand.restaurants.model.Role;
 import ru.seleand.restaurants.service.UserService;
+import ru.seleand.restaurants.to.UserTo;
+import ru.seleand.restaurants.util.UserUtil;
+import ru.seleand.restaurants.web.user.AbstractUserController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Objects;
 
 @Controller
-public class RootController {
+public class RootController extends AbstractUserController {
 /*
     @Autowired
     private RestaurantService restaurantService;
@@ -80,6 +84,27 @@ public class RootController {
         }
         return "userRestaurantList";
     }
+
+
+    @GetMapping("/register")
+    public String register(ModelMap model) {
+        model.addAttribute("userTo", new UserTo());
+        model.addAttribute("register", true);
+        return "profile";
+    }
+
+    @PostMapping("/register")
+    public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("register", true);
+            return "profile";
+        } else {
+            super.create(UserUtil.createNewFromTo(userTo));
+            status.setComplete();
+            return "redirect:login?message=app.registered";
+        }
+    }
+
     private int getParameterInt(HttpServletRequest request, String parameterName) {
         String param = Objects.requireNonNull(request.getParameter(parameterName));
         return Integer.valueOf(param);
