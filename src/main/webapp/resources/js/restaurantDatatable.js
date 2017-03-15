@@ -86,7 +86,7 @@ function changeVote(id) {
             },
         success: function () {
             updateTable();
-            // successNoty('common.saved');
+            successNoty('common.saved');
         }
     });
 }
