@@ -26,8 +26,10 @@ public class RootController {
     private DishService dishService;
 */
 
+/*
     @Autowired
     private UserService userService;
+*/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -54,11 +56,13 @@ public class RootController {
         return "login";
     }
 
+/*
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String users(Model model) {
         model.addAttribute("users", userService.getAll());
         return "users";
     }
+*/
 
 /*
     @RequestMapping(value = "/users", method = RequestMethod.POST)

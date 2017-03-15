@@ -20,12 +20,21 @@ import java.util.List;
 @RestController
 @RequestMapping(VoteRestController.REST_URL)
 public class VoteRestController {
-    static final String REST_URL = "/rest/votes/restaurant";
+    static final String REST_URL = "/ajax/votes/restaurant";
     private static final Logger LOG = LoggerFactory.getLogger(VoteRestController.class);
 
     @Autowired
     private VoteService service;
 
+    @PostMapping //(value = "/{restaurantId}")
+    public void changeVoteState(int restaurantId) {
+        int userId = AuthorizedUser.id();
+        LOG.info("change state of vote by restaurant with id {} for User {}", restaurantId, userId);
+        service.changeVoteState(restaurantId, userId);
+
+    }
+
+/*
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote get(@PathVariable("id") int id) {
         int userId = AuthorizedUser.id();
@@ -60,5 +69,6 @@ public class VoteRestController {
         LOG.info("getBetween dates {} - {} for User {}", startDate, endDate, userId);
         return service.getUserVotesBetween(startDate, endDate, userId);
     }
+*/
 
 }

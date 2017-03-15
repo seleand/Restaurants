@@ -42,12 +42,12 @@ public class JdbcVoteRepositoryImpl implements VoteRepository {
 
     @Override
     @Transactional
-    public Vote save(Vote vote, int userId) {
+    public Vote save(Vote vote, int restaurantId, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", vote.getId())
                 .addValue("date",vote.getDate())
                 .addValue("user_id",userId)
-                .addValue("restaurant_id",vote.getRestaurant().getId());
+                .addValue("restaurant_id",restaurantId);
 
         if (vote.isNew()) {
             Number newKey = insertVote.executeAndReturnKey(map);

@@ -2,6 +2,7 @@
  * Created by Asus on 08.03.2017.
  */
 var ajaxUrl = 'ajax/restaurants/';
+var restVoteUrl = 'ajax/votes/restaurant/';
 var datatableApi;
 
 /*
@@ -67,6 +68,21 @@ function renderDishesBtn(data, type, row) {
 
 function renderVoteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a href="dishes?restaurantId=' + row.id + '" class="btn btn-xs btn-primary">'+i18n[+row.userVotedThisRestaurantToday ? 'restaurants.voted' : 'restaurants.vote']+'</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="changeVote(' + row.id + ');">'+i18n[+row.userVotedThisRestaurantToday ? 'restaurants.voted' : 'restaurants.vote']+'</a>';
     }
+}
+
+function changeVote(id) {
+    $.ajax({
+        type: "POST",
+        url: restVoteUrl,
+        data:
+            {
+                restaurantId: id
+            },
+        success: function () {
+            updateTable();
+            // successNoty('common.saved');
+        }
+    });
 }

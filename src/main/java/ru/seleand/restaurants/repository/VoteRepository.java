@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Asus on 02.03.2017.
  */
 public interface VoteRepository {
-    Vote save(Vote vote, int userId);
+    Vote save(Vote vote, int restaurantId, int userId);
 
     boolean delete(int id, int userId);
 

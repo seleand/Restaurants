@@ -9,6 +9,7 @@ import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -20,9 +21,9 @@ public class VoteServiceImpl implements VoteService {
     private VoteRepository repository;
 
     @Override
-    public Vote save(Vote vote, int userId) {
+    public Vote save(Vote vote, int restaurantId, int userId) {
         Assert.notNull(vote, "vote must be not null");
-        return repository.save(vote, userId);
+        return repository.save(vote, restaurantId, userId);
     }
 
     @Override
@@ -36,9 +37,39 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public void update(Vote vote, int userId) {
+    public void update(Vote vote, int restaurantId, int userId) {
         Assert.notNull(vote, "vote must be not null");
-        repository.save(vote, userId);
+        repository.save(vote, restaurantId, userId);
+    }
+
+    @Override
+    public void changeVoteState(int restaurantId, int userId) {
+        LocalDate today = LocalDate.now();
+        List<Vote> votesByUserToday = repository.getUserVotesBetween(today, today, userId);
+        if (votesByUserToday.size()==0){
+            Vote vote = new Vote(today);
+//            LOG.info("New vote by restaurant with id {} for User {}", restaurantId, userId);
+            repository.save(vote, restaurantId, userId);
+        }
+        else {
+            LocalTime timeNow = LocalTime.now();
+            LocalTime time11 = LocalTime.of(11,0);
+            if (timeNow.isAfter(time11)) {
+
+            }
+            else {
+                Vote vote = votesByUserToday.get(0);
+                if (restaurantId==vote.getRestaurant().getId()){
+//                    LOG.info("delete vote by restaurant with id {} for User {}", restaurantId, userId);
+                    repository.delete(vote.getId(), userId);
+                }
+                else {
+//                    LOG.info("update vote by restaurant with id {} for User {}", restaurantId, userId);
+                    repository.save(vote, restaurantId, userId);
+                }
+            }
+        }
+
     }
 
     @Override

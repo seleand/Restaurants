@@ -11,13 +11,15 @@ import java.util.List;
  */
 public interface VoteService {
 
-    Vote save(Vote vote, int userId);
+    Vote save(Vote vote, int restaurantId, int userId);
 
     void delete(int id, int userId) throws NotFoundException;
 
     Vote get(int id, int userId) throws NotFoundException;
 
-    void update(Vote vote, int userId);
+    void update(Vote vote, int restaurantId, int userId);
+
+    void changeVoteState(int restaurantId, int userId);
 
     List<Vote> getUserVotes(int userId);
 

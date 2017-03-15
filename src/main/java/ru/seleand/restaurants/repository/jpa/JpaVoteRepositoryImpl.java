@@ -3,6 +3,7 @@ package ru.seleand.restaurants.repository.jpa;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.model.Vote;
 import ru.seleand.restaurants.repository.VoteRepository;
@@ -24,11 +25,12 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
 
     @Override
     @Transactional
-    public Vote save(Vote vote, int userId) {
+    public Vote save(Vote vote, int restaurantId, int userId) {
         if (!vote.isNew() && get(vote.getId(), userId) == null) {
             return null;
         }
         vote.setUser(em.getReference(User.class, userId));
+        vote.setRestaurant(em.getReference(Restaurant.class, restaurantId));
         if (vote.isNew()) {
             em.persist(vote);
             return vote;
