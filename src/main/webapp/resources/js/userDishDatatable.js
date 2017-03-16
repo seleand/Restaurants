@@ -5,6 +5,7 @@
 var datatableApi;
 
 $(function () {
+/*
     datatableApi = $('#datatable').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -12,6 +13,8 @@ $(function () {
         },
         "paging": false,
         "info": true,
+*/
+    datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {
                 "data": "date"
@@ -35,7 +38,7 @@ $(function () {
                 "desc"
             ]
         ]
-    });
+    }));
     makeEditable();
 });
 

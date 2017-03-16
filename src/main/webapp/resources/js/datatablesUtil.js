@@ -7,6 +7,25 @@ function makeEditable() {
     });
 }
 
+// https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
+function extendsOpts(opts) {
+    $.extend(true, opts,
+        {
+            "ajax": {
+                "url": ajaxUrl,
+                "dataSrc": ""
+            },
+            "paging": false,
+            "info": true,
+            "language": {
+                "search": i18n["common.search"]
+            }
+        }
+    );
+    return opts;
+}
+
+
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 $(document).ajaxSend(function(e, xhr, options) {
