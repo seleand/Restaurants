@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import ru.seleand.restaurants.TestUtil;
 import ru.seleand.restaurants.model.Role;
 import ru.seleand.restaurants.model.User;
+import ru.seleand.restaurants.to.UserTo;
 import ru.seleand.restaurants.web.AbstractControllerTest;
 import ru.seleand.restaurants.web.json.JsonUtil;
 
@@ -54,5 +55,16 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     public void testGetUnauth() throws Exception {
         mockMvc.perform(get(REST_URL))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testUpdateInvalid() throws Exception {
+        UserTo updatedTo = new UserTo(null, null, "password", null);
+
+        mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 }

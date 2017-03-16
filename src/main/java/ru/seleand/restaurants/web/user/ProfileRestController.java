@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.User;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {
@@ -21,7 +23,7 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody User user) {
+    public void update(@Valid @RequestBody User user) {
         super.update(user, AuthorizedUser.id());
     }
 }

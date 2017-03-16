@@ -1,13 +1,17 @@
 package ru.seleand.restaurants.util.exception;
 
 public class ErrorInfo {
-    public final String url;
-    public final String cause;
-    public final String detail;
+    private final String url;
+    private final String cause;
+    private final String[] details;
 
     public ErrorInfo(CharSequence url, Throwable ex) {
-        this.url = url.toString();
-        this.cause = ex.getClass().getSimpleName();
-        this.detail = ex.getLocalizedMessage();
+        this(url, ex.getClass().getSimpleName(), ex.getLocalizedMessage());
+    }
+
+    public ErrorInfo(CharSequence requestURL, String cause, String... details) {
+        this.url = requestURL.toString();
+        this.cause = cause;
+        this.details = details;
     }
 }

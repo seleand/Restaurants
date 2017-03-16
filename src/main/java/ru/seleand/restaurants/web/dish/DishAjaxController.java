@@ -38,18 +38,20 @@ public class DishAjaxController extends AbstractDishController{
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<String> createOrUpdate(@Valid DishTo dishTo, BindingResult result) {
+    public void createOrUpdate(@Valid DishTo dishTo, BindingResult result) {
+/*
         if (result.hasErrors()) {
             StringBuilder sb = new StringBuilder();
             result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
+*/
         if (dishTo.isNew()) {
             super.create(DishUtil.createNewFromTo(dishTo),dishTo.getRestaurantId());
         } else {
             super.update(dishTo);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 /*

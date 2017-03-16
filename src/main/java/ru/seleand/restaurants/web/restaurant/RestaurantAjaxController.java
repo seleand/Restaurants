@@ -25,12 +25,14 @@ public class RestaurantAjaxController extends AbstractRestaurantController{
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<String> createOrUpdate(@Valid Restaurant restaurant, BindingResult result) {
+    public void createOrUpdate(@Valid Restaurant restaurant, BindingResult result) {
+/*
         if (result.hasErrors()) {
             StringBuilder sb = new StringBuilder();
             result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
+*/
 //    public void createOrUpdate(Restaurant restaurant) {
 
 //        Restaurant restaurant = new Restaurant(id, name);
@@ -39,7 +41,7 @@ public class RestaurantAjaxController extends AbstractRestaurantController{
         } else {
             super.update(restaurant, restaurant.getId());
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
