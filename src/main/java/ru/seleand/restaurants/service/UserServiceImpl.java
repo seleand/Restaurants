@@ -12,10 +12,14 @@ import org.springframework.util.Assert;
 import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.User;
 import ru.seleand.restaurants.repository.UserRepository;
+import ru.seleand.restaurants.to.UserTo;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.util.List;
+
+import static ru.seleand.restaurants.util.UserUtil.prepareToSave;
+import static ru.seleand.restaurants.util.UserUtil.updateFromTo;
 
 /**
  * Created by Asus on 02.11.2016.
@@ -28,7 +32,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
         Assert.notNull(user, "user must be not null");
-        return repository.save(user);
+        return repository.save(prepareToSave(user));
     }
 
     @Override
@@ -58,7 +62,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
         Assert.notNull(user, "user must be not null");
-        repository.save(user);
+        repository.save(prepareToSave(user));
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Transactional
+    @Override
+    public void update(UserTo userTo) {
+        User user = updateFromTo(get(userTo.getId()), userTo);
+        repository.save(prepareToSave(user));
     }
 
     @CacheEvict(value = "users", allEntries = true)

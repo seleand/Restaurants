@@ -2,6 +2,7 @@ package ru.seleand.restaurants.service;
 
 
 import ru.seleand.restaurants.model.User;
+import ru.seleand.restaurants.to.UserTo;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface UserService {
     List<User> getAll();
 
     void update(User user);
+
+    void update(UserTo user);
 
     void enable(int id, boolean enable);
 
