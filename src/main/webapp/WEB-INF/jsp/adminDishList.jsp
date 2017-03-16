@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>--%>
 
 <html>
@@ -66,7 +67,7 @@
                 <h2 class="modal-title"  id="modalTitle"></h2>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="post" id="detailsForm">
+                <form:form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="restaurantId" name="restaurantId">
                     <input type="hidden" id="id" name="id">
 <%--
@@ -104,7 +105,7 @@
                             <button class="btn btn-primary" type="button" onclick="saveDish()"><fmt:message key="common.save"/></button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
