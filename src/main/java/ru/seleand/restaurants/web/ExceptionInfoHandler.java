@@ -10,6 +10,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import ru.seleand.restaurants.util.exception.ChangeVoteAfter11Exception;
 import ru.seleand.restaurants.util.exception.ErrorInfo;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
@@ -52,6 +53,13 @@ public class ExceptionInfoHandler {
         return logAndGetValidationErrorInfo(req, e.getBindingResult());
     }
 
+    @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)  // 405
+    @ExceptionHandler(ChangeVoteAfter11Exception.class)
+    @ResponseBody
+    @Order(Ordered.HIGHEST_PRECEDENCE + 3)
+    public ErrorInfo restValidationError(HttpServletRequest req, ChangeVoteAfter11Exception e) {
+        return logAndGetErrorInfo(req, e, false);
+    }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)

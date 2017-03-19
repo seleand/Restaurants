@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.seleand.restaurants.model.Vote;
 import ru.seleand.restaurants.repository.VoteRepository;
+import ru.seleand.restaurants.util.exception.ChangeVoteAfter11Exception;
 import ru.seleand.restaurants.util.exception.ExceptionUtil;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
@@ -43,7 +44,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public void changeVoteState(int restaurantId, int userId) {
+    public void changeVoteState(int restaurantId, int userId) throws ChangeVoteAfter11Exception {
         LocalDate today = LocalDate.now();
         List<Vote> votesByUserToday = repository.getUserVotesBetween(today, today, userId);
         if (votesByUserToday.size()==0){
@@ -55,7 +56,7 @@ public class VoteServiceImpl implements VoteService {
             LocalTime timeNow = LocalTime.now();
             LocalTime time11 = LocalTime.of(11,0);
             if (timeNow.isAfter(time11)) {
-
+                throw new ChangeVoteAfter11Exception("Cann't change vote after 11");
             }
             else {
                 Vote vote = votesByUserToday.get(0);

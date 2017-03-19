@@ -3,11 +3,14 @@ package ru.seleand.restaurants.web.vote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.seleand.restaurants.AuthorizedUser;
 import ru.seleand.restaurants.model.Vote;
 import ru.seleand.restaurants.service.VoteService;
+import ru.seleand.restaurants.util.exception.ChangeVoteAfter11Exception;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,11 +29,19 @@ public class VoteRestController {
     @Autowired
     private VoteService service;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @PostMapping //(value = "/{restaurantId}")
     public void changeVoteState(int restaurantId) {
         int userId = AuthorizedUser.id();
         LOG.info("change state of vote by restaurant with id {} for User {}", restaurantId, userId);
-        service.changeVoteState(restaurantId, userId);
+        try {
+            service.changeVoteState(restaurantId, userId);
+        }
+        catch (ChangeVoteAfter11Exception ex){
+            throw new ChangeVoteAfter11Exception(messageSource.getMessage("exception.changeVoteAfter11", null, LocaleContextHolder.getLocale()));
+        }
 
     }
 

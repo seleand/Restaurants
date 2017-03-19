@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.service;
 
 import ru.seleand.restaurants.model.Vote;
+import ru.seleand.restaurants.util.exception.ChangeVoteAfter11Exception;
 import ru.seleand.restaurants.util.exception.NotFoundException;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public interface VoteService {
 
     void update(Vote vote, int restaurantId, int userId);
 
-    void changeVoteState(int restaurantId, int userId);
+    void changeVoteState(int restaurantId, int userId) throws ChangeVoteAfter11Exception;
 
     List<Vote> getUserVotes(int userId);
 
