@@ -16,6 +16,8 @@ public interface VoteService {
 
     void delete(int id, int userId) throws NotFoundException;
 
+    void deleteByRestaurant(int restaurantId, int userId) throws NotFoundException;
+
     Vote get(int id, int userId) throws NotFoundException;
 
     void update(Vote vote, int restaurantId, int userId);

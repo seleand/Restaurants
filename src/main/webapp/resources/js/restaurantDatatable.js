@@ -75,21 +75,32 @@ function renderDishesBtn(data, type, row) {
 
 function renderVoteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" onclick="changeVote(' + row.id + ');">'+i18n[+row.userVotedThisRestaurantToday ? 'restaurants.voted' : 'restaurants.vote']+'</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="changeVote(' + row.id + ', '+row.userVotedThisRestaurantToday+');">'+i18n[+row.userVotedThisRestaurantToday ? 'restaurants.voted' : 'restaurants.vote']+'</a>';
     }
 }
 
-function changeVote(id) {
-    $.ajax({
-        type: "POST",
-        url: restVoteUrl, // + id,
-        data:
-            {
+function changeVote(id, userVotedThisRestaurantToday) {
+    if (userVotedThisRestaurantToday) {
+        $.ajax({
+            type: "DELETE",
+            url: restVoteUrl + id,
+            success: function () {
+                updateTable();
+                successNoty('common.deleted');
+            }
+        });
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: restVoteUrl, // + id,
+            data: {
                 restaurantId: id
             },
-        success: function () {
-            updateTable();
-            successNoty('common.saved');
-        }
-    });
+            success: function () {
+                updateTable();
+                successNoty('common.saved');
+            }
+        });
+    }
 }

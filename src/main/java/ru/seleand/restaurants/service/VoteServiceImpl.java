@@ -18,6 +18,8 @@ import java.util.List;
  */
 @Service
 public class VoteServiceImpl implements VoteService {
+
+    private static LocalTime time11 = LocalTime.of(11, 0);
     @Autowired
     private VoteRepository repository;
 
@@ -44,27 +46,43 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
+    public void deleteByRestaurant(int restaurantId, int userId) throws NotFoundException {
+        LocalDate today = LocalDate.now();
+        List<Vote> votesByUserToday = repository.getUserVotesBetween(today, today, userId);
+        if (votesByUserToday.size() == 0) {
+            throw new NotFoundException("Vote for this restaurant not found");
+        } else {
+            LocalTime timeNow = LocalTime.now();
+            if (timeNow.isAfter(time11)) {
+                throw new ChangeVoteAfter11Exception("Cann't change vote after 11");
+            } else {
+                Vote vote = votesByUserToday.get(0);
+                if (restaurantId == vote.getRestaurant().getId()) {
+                    repository.delete(vote.getId(), userId);
+                }
+            }
+        }
+    }
+
+    @Override
     public void changeVoteState(int restaurantId, int userId) throws ChangeVoteAfter11Exception {
         LocalDate today = LocalDate.now();
         List<Vote> votesByUserToday = repository.getUserVotesBetween(today, today, userId);
-        if (votesByUserToday.size()==0){
+        if (votesByUserToday.size() == 0) {
             Vote vote = new Vote(today);
 //            LOG.info("New vote by restaurant with id {} for User {}", restaurantId, userId);
             repository.save(vote, restaurantId, userId);
-        }
-        else {
+        } else {
             LocalTime timeNow = LocalTime.now();
-            LocalTime time11 = LocalTime.of(11,0);
+//            LocalTime time11 = LocalTime.of(18,0);
             if (timeNow.isAfter(time11)) {
                 throw new ChangeVoteAfter11Exception("Cann't change vote after 11");
-            }
-            else {
+            } else {
                 Vote vote = votesByUserToday.get(0);
-                if (restaurantId==vote.getRestaurant().getId()){
+                if (restaurantId == vote.getRestaurant().getId()) {
 //                    LOG.info("delete vote by restaurant with id {} for User {}", restaurantId, userId);
-                    repository.delete(vote.getId(), userId);
-                }
-                else {
+//                        repository.delete(vote.getId(), userId);
+                } else {
 //                    LOG.info("update vote by restaurant with id {} for User {}", restaurantId, userId);
                     repository.save(vote, restaurantId, userId);
                 }

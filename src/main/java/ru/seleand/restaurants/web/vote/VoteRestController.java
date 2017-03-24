@@ -33,7 +33,7 @@ public class VoteRestController {
     private MessageSource messageSource;
 
     @PostMapping //(value = "/{restaurantId}")
-    public void changeVoteState(int restaurantId) {
+    public void changeVoteState(Integer restaurantId) {
         int userId = AuthorizedUser.id();
         LOG.info("change state of vote by restaurant with id {} for User {}", restaurantId, userId);
         try {
@@ -45,19 +45,20 @@ public class VoteRestController {
 
     }
 
+    @DeleteMapping(value = "/{restaurantId}")
+    public void delete(@PathVariable("restaurantId") int restaurantId) {
+        int userId = AuthorizedUser.id();
+        LOG.info("delete vote for restaurant with id {} for User {}", restaurantId, userId);
+        service.deleteByRestaurant(restaurantId, userId);
+    }
+
+
 /*
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote get(@PathVariable("id") int id) {
         int userId = AuthorizedUser.id();
         LOG.info("Get vote by id {} for User {}",id, userId);
         return service.get(id, userId);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(int id) {
-        int userId = AuthorizedUser.id();
-        LOG.info("delete meal {} for User {}", id, userId);
-        service.delete(id, userId);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
