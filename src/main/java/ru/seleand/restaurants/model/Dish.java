@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -25,6 +26,7 @@ public class Dish extends BaseEntity{
 
     @Column(name = "description", nullable = false)
     @NotEmpty
+    @SafeHtml
     private String description;
 
     @Column(name = "price", nullable = false)

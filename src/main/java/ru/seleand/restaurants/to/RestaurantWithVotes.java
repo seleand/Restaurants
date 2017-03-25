@@ -1,12 +1,14 @@
 package ru.seleand.restaurants.to;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 /**
  * Created by Asus on 26.02.2017.
  */
 public class RestaurantWithVotes {
     @NotEmpty
+    @SafeHtml
     private String name;
 
     private Integer id;

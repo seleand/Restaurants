@@ -1,6 +1,7 @@
 package ru.seleand.restaurants.to;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
@@ -21,8 +22,10 @@ public class DishTo {
 //    private Date date;
 
     @NotEmpty
+    @SafeHtml
     private String description;
 
+    @SafeHtml
     private String price;
 
     public DishTo() {
