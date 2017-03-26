@@ -21,19 +21,19 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100001);
 
 INSERT INTO restaurants (name)
-VALUES ('restaurant 1');
+VALUES ('Рога и копыта');
 
 INSERT INTO restaurants (name)
-VALUES ('restaurant 2');
+VALUES ('Розовые пятачки');
 
 INSERT INTO dishes (description, price, date, restaurant_id)
 VALUES
-  ('dish 1 rest1', 5000, '2016-11-13', 100002),
-  ('dish 2 rest1', 6515, '2016-11-13',  100002),
-  ('dish 3 rest1', 8005, '2016-11-12',  100002),
-  ('dish 1 rest2', 7000,  '2016-11-13', 100003),
-  ('dish 2 rest2', 5700, '2016-11-13',  100003),
-  ('dish 3 rest3', 6000,  '2016-11-12', 100003);
+  ('Рога под острым соусом', 5000, '2016-11-13', 100002),
+  ('Копыта запеченные с яблоками', 6515, '2016-11-13',  100002),
+  ('Компот из толченых копыт', 8005, '2016-11-12',  100002),
+  ('Пятачки трех поросят маринованные', 7000,  '2016-11-13', 100003),
+  ('Пятачки под майонезом', 5700, '2016-11-13',  100003),
+  ('Настойка из пятачков', 6000,  '2016-11-12', 100003);
 
 INSERT INTO votes (date, user_id, restaurant_id)
 VALUES
