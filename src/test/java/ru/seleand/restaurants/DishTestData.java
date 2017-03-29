@@ -24,7 +24,7 @@ public class DishTestData {
     public static final Dish DISH_5 = new Dish(DISH_ID+4, LocalDate.of(2016,11,13),"Пятачки под майонезом",5700);
     public static final Dish DISH_6 = new Dish(DISH_ID+5, LocalDate.of(2016,11,12),"Настойка из пятачков",6000);
 
-    public static final List<Dish> DISHES_RESTAURANT_1 = Arrays.asList(DISH_1, DISH_2, DISH_3);
+    public static final List<Dish> DISHES_RESTAURANT_1 = Arrays.asList(DISH_2, DISH_1, DISH_3);
     public static final List<Dish> DISHES_RESTAURANT_2 = Arrays.asList(DISH_4, DISH_5, DISH_6);
 
 }

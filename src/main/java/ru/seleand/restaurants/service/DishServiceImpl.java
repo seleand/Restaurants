@@ -43,9 +43,10 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public void update(Dish dish, int restaurantId) {
+    public void update(Dish dish, int restaurantId) throws NotFoundException {
         Assert.notNull(dish, "dish must be not null");
-        repository.save(dish, restaurantId);
+        ExceptionUtil.checkNotFoundWithId(repository.save(dish, restaurantId), dish.getId());
+//        repository.save(dish, restaurantId);
     }
 
     @Transactional

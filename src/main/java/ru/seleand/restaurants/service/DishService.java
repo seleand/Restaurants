@@ -18,7 +18,7 @@ public interface DishService {
 
     List<Dish> getAll(int restaurantId);
 
-    void update(Dish dish, int restaurantId);
+    void update(Dish dish, int restaurantId) throws NotFoundException;
 
     void update(DishTo dishTo);
 
