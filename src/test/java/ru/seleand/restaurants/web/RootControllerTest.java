@@ -16,25 +16,18 @@ import static ru.seleand.restaurants.model.BaseEntity.START_SEQ;
 public class RootControllerTest extends AbstractControllerTest {
 
     @Test
-    public void testUsers() throws Exception {
-        mockMvc.perform(get("/users")
-                .with(userAuth(ADMIN)))
+    public void testDishes() throws Exception {
+        mockMvc.perform(get("/dishes")
+                .with(userAuth(ADMIN))
+                .param("restaurantId","100002"))
                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("users"))
-                .andExpect(forwardedUrl("/WEB-INF/jsp/users.jsp"))
-                .andExpect(model().attribute("users", hasSize(2)))
-                .andExpect(model().attribute("users", hasItem(
-                        allOf(
-                                hasProperty("id", is(START_SEQ)),
-                                hasProperty("name", is(USER.getName()))
-                        )
-                )));
+                .andExpect(view().name("adminDishList"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/adminDishList.jsp"));
     }
 
     @Test
     public void testUnAuth() throws Exception {
-        mockMvc.perform(get("/users"))
+        mockMvc.perform(get("/restaurants"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
@@ -46,16 +39,7 @@ public class RootControllerTest extends AbstractControllerTest {
                 .with(userAuth(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("restaurantList"))
+                .andExpect(view().name("adminRestaurantList"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/adminRestaurantList.jsp"));
-/*
-                .andExpect(model().attribute("restaurantList", hasSize(2)))
-                .andExpect(model().attribute("restaurantList", hasItem(
-                        allOf(
-                                hasProperty("id", is(RESTAURANT_ID)),
-                                hasProperty("name", is(RESTAURANT_1.getName()))
-                        )
-                )));
-*/
     }
 }

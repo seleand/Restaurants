@@ -61,23 +61,6 @@ public class RootController extends AbstractUserController {
         return "login";
     }
 
-/*
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String users(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "users";
-    }
-*/
-
-/*
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public String setUser(HttpServletRequest request) {
-        int userId = Integer.valueOf(request.getParameter("userId"));
-        AuthorizedUser.setId(userId);
-        return "redirect:restaurants";
-    }
-*/
-
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
