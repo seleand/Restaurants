@@ -17,12 +17,12 @@ public class DishTestData {
 
     public static final int DISH_ID = START_SEQ+4;
 
-    public static final Dish DISH_1 = new Dish(DISH_ID, LocalDate.of(2016,11,13),"dish 1 rest1",5000);
-    public static final Dish DISH_2 = new Dish(DISH_ID+1, LocalDate.of(2016,11,13),"dish 2 rest1",6515);
-    public static final Dish DISH_3 = new Dish(DISH_ID+2, LocalDate.of(2016,11,12),"dish 3 rest1",8005);
-    public static final Dish DISH_4 = new Dish(DISH_ID+3, LocalDate.of(2016,11,13),"dish 1 rest2",7000);
-    public static final Dish DISH_5 = new Dish(DISH_ID+4, LocalDate.of(2016,11,13),"dish 2 rest2",5700);
-    public static final Dish DISH_6 = new Dish(DISH_ID+5, LocalDate.of(2016,11,12),"dish 3 rest2",6000);
+    public static final Dish DISH_1 = new Dish(DISH_ID, LocalDate.of(2016,11,13),"Рога под острым соусом",5000);
+    public static final Dish DISH_2 = new Dish(DISH_ID+1, LocalDate.of(2016,11,13),"Копыта запеченные с яблоками",6515);
+    public static final Dish DISH_3 = new Dish(DISH_ID+2, LocalDate.of(2016,11,12),"Компот из толченых копыт",8005);
+    public static final Dish DISH_4 = new Dish(DISH_ID+3, LocalDate.of(2016,11,13),"Пятачки трех поросят маринованные",7000);
+    public static final Dish DISH_5 = new Dish(DISH_ID+4, LocalDate.of(2016,11,13),"Пятачки под майонезом",5700);
+    public static final Dish DISH_6 = new Dish(DISH_ID+5, LocalDate.of(2016,11,12),"Настойка из пятачков",6000);
 
     public static final List<Dish> DISHES_RESTAURANT_1 = Arrays.asList(DISH_1, DISH_2, DISH_3);
     public static final List<Dish> DISHES_RESTAURANT_2 = Arrays.asList(DISH_4, DISH_5, DISH_6);

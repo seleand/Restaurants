@@ -13,7 +13,7 @@ public class RestaurantTestData {
 
     public static final int RESTAURANT_ID = START_SEQ+2;
 
-    public static final Restaurant RESTAURANT_1 = new Restaurant(RESTAURANT_ID, "restaurant 1");
-    public static final Restaurant RESTAURANT_2 = new Restaurant(RESTAURANT_ID+1, "restaurant 2");
+    public static final Restaurant RESTAURANT_1 = new Restaurant(RESTAURANT_ID, "Рога и копыта");
+    public static final Restaurant RESTAURANT_2 = new Restaurant(RESTAURANT_ID+1, "Розовые пятачки");
 
 }
