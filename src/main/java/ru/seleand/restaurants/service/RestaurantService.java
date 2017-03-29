@@ -22,6 +22,6 @@ public interface RestaurantService {
 
     List<RestaurantWithVotes> findAllWithVotes(Integer userId);
 
-    Restaurant getWithDishes(int id);
+//    Restaurant getWithDishes(int id);
 
 }
