@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import ru.seleand.restaurants.model.Restaurant;
 import ru.seleand.restaurants.model.Role;
+import ru.seleand.restaurants.service.RestaurantService;
 import ru.seleand.restaurants.service.UserService;
 import ru.seleand.restaurants.to.UserTo;
 import ru.seleand.restaurants.util.UserUtil;
@@ -21,10 +23,8 @@ import java.util.Objects;
 
 @Controller
 public class RootController extends AbstractUserController {
-/*
     @Autowired
     private RestaurantService restaurantService;
-*/
 
 /*
     @Autowired
@@ -45,7 +45,9 @@ public class RootController extends AbstractUserController {
     public String getAll(HttpServletRequest request, Model model) {
         int restaurantId = getParameterInt(request,"restaurantId");
 //        model.addAttribute("dishList", dishService.getAll(restaurantId));
+        Restaurant restaurant = restaurantService.get(restaurantId);
         model.addAttribute("restaurantId",restaurantId);
+        model.addAttribute("restaurantName",restaurant.getName());
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(Role.ROLE_ADMIN)){
             return "adminDishList";
         }

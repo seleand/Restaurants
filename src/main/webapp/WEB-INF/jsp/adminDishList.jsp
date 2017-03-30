@@ -15,7 +15,8 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3><fmt:message key="dishes.title"/></h3>
+            <h3><fmt:message key="dishes.title"/> "${restaurantName}"</h3>
+                <%--<h3>${restaurantName}</h3>--%>
 
             <div class="view-box">
                 <a class="btn btn-sm btn-info" onclick="addDish('<fmt:message key="dishes.add"/>')"><fmt:message
