@@ -42,7 +42,7 @@ public class DishRestControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(DISH_1, DISH_2, DISH_3)));
+                .andExpect(MATCHER.contentListMatcher(DISH_2, DISH_1, DISH_3)));
 
     }
 
@@ -83,7 +83,7 @@ public class DishRestControllerTest extends AbstractControllerTest{
         expected.setId(returned.getId());
 
         MATCHER.assertEquals(expected, returned);
-        MATCHER.assertCollectionEquals(Arrays.asList(expected, DISH_1, DISH_2, DISH_3), dishService.getAll(RESTAURANT_ID));
+        MATCHER.assertCollectionEquals(Arrays.asList(expected, DISH_2, DISH_1, DISH_3), dishService.getAll(RESTAURANT_ID));
 
     }
 
